@@ -1,0 +1,13 @@
+section.container.question_answers
+  h4= notice
+  br
+  hr
+  h3= @question.title
+  p
+    = @question.body
+  br
+  p= link_to 'Редактировать вопрос', edit_question_path(@question.id)
+  p= link_to 'Удалить вопрос', @question, method: :delete
+  hr
+  div.answers
+    = render 'answers/answers'
