@@ -28,7 +28,7 @@ describe AnswersController do
         expect(response).to redirect_to question_path(id: question.id)
       end
     end
-    context ' create answer with invalid attributes' do
+    context 'create answer with invalid attributes' do
       it 'try save new question, but not save' do
         expect { post :create, question_id: question.id, answer: attributes_for(:invalid_answer) }
             .to_not change(Answer, :count)
@@ -42,7 +42,7 @@ describe AnswersController do
 
   describe 'PATCH #update' do
     context 'with valid attributes' do
-      it 'it sets variable @answer  requested question' do
+      it 'it sets variable @answer  requested answer' do
         patch :update, question_id: question.id,
               id: answer, answer: attributes_for(:answer)
         expect(assigns(:answer)).to eq answer
