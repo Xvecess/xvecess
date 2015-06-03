@@ -1,8 +1,10 @@
-section.row
+H3 Ответы
+section.answer
   - @question.answers.each do |answer|
     - if answer.persisted?
       br
       div id = answer.id
         p = answer.body
         br
-        p = link_to 'Редактировать',edit_answer_path(answer.id)
+        p = link_to 'Редактировать', edit_question_answer_path(@question.id, id: answer.id)
+        p = link_to 'Удалить', [@question,answer], method: :delete

@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
+  root 'questions#index'
   resources :questions do
-    resources :answers, shallow: true
+    resources :answers
   end
 
   # The priority is based upon order of creation: first created -> highest priority.
