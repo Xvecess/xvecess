@@ -11,6 +11,8 @@ class AnswersController < ApplicationController
     if @answer.save
       redirect_to question_path(params[:question_id]),
                   notice: 'Ответ успешно создан'
+    else
+      render :new
     end
   end
 
@@ -18,6 +20,8 @@ class AnswersController < ApplicationController
     if @answer.update(answer_params)
       redirect_to question_path(params[:question_id]),
                   notice: 'Ответ обновлен'
+    else
+      render :edit
     end
   end
 
