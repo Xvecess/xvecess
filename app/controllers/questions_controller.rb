@@ -10,13 +10,13 @@ class QuestionsController < ApplicationController
   end
 
   def show
-    @answers = @question.answers.build
+    @answer = @question.answers.build
   end
 
   def create
     @question = Question.new(question_params)
     if @question.save
-      redirect_to new_question_path, notice: 'Ваш вопрос добавлен'
+      redirect_to questions_path, notice: 'Ваш вопрос добавлен'
     else
       render :new
     end
