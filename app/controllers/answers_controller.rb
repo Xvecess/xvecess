@@ -9,8 +9,7 @@ class AnswersController < ApplicationController
   def create
     @answer = @question.answers.new(answer_params)
     if @answer.save
-      redirect_to question_path(params[:question_id]),
-                  notice: 'Ответ успешно создан'
+      redirect_to @question, notice: 'Ответ успешно создан'
     else
       render :new
     end
@@ -18,8 +17,7 @@ class AnswersController < ApplicationController
 
   def update
     if @answer.update(answer_params)
-      redirect_to question_path(params[:question_id]),
-                  notice: 'Ответ обновлен'
+      redirect_to @answer.question, notice: 'Ответ обновлен'
     else
       render :edit
     end
@@ -27,8 +25,7 @@ class AnswersController < ApplicationController
 
   def destroy
     @answer.destroy
-    redirect_to question_path(params[:question_id]),
-                notice: 'Ответ удален'
+    redirect_to @answer.question, notice: 'Ответ удален'
   end
 
   private
