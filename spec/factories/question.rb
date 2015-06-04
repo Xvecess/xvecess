@@ -3,4 +3,8 @@ FactoryGirl.define do
     title 'MyQuestion'
     body 'MyText'
   end
+  factory :invalid_question , class: 'Question' do
+    title ''
+    body 'MyText'
+  end
 end
