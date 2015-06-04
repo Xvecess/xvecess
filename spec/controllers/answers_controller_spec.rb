@@ -23,12 +23,7 @@ describe AnswersController do
   describe 'POST #create' do
     context ' create answer with valid attributes' do
 
-      it 'try save new answer in database' do
-        expect { post :create, question_id: question.id, answer: attributes_for(:answer) }
-            .to change(Answer, :count).by(1)
-      end
-
-      it 'the answer belong to question' do
+      it 'the answer belong to question and saving in database' do
         expect { post :create, question_id: question.id, answer: attributes_for(:answer) }
             .to change(question.answers, :count).by(1)
       end
