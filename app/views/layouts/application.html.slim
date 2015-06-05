@@ -10,5 +10,19 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1"
 
   body
+    nav.container.main-nav
+      ul.navigation-links.navbar-default.nav
+        li
+          = link_to 'Вопросы', questions_path
+        li
+          = link_to 'Теги'
+        li
+          = link_to 'Пользователи'
+        li
+          = link_to 'Задать вопрос', new_question_path
 
-    = yield
+    div.container.notices
+      p.notice #{ notice }
+      p.alert #{ alert }
+    .container
+       = yield

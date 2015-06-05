@@ -18,6 +18,7 @@ describe QuestionsController do
   end
 
   describe 'GET #new' do
+    sign_in_user
     before { get :new }
 
     it 'assigns @question to be a new question' do
@@ -46,6 +47,7 @@ describe QuestionsController do
   end
 
   describe 'GET #edit' do
+    sign_in_user
     before { get :edit, id: question }
 
     it 'it sets variable @question  requested question' do
@@ -58,6 +60,7 @@ describe QuestionsController do
   end
 
   describe 'POST #create' do
+    sign_in_user
     context ' create question with valid attributes' do
 
       it 'try save new question in database' do
@@ -86,6 +89,7 @@ describe QuestionsController do
   end
 
   describe 'PATCH #update' do
+    sign_in_user
     context 'with valid attributes' do
 
       it 'it sets variable @question  requested question' do
@@ -123,6 +127,7 @@ describe QuestionsController do
   end
 
   describe 'DELETE #destroy' do
+    sign_in_user
     before { question }
 
     it 'delete question' do
