@@ -26,8 +26,9 @@ ul.navigation-links li {
 .notices {
     color: #ff0000;
     font-size: 22px;
-    margin-top:20px;
+    margin-top: 20px;
 }
+
 .new_user {
-    max-width: 200px;
+    max-width: 250px;
 }
