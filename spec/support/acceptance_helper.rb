@@ -15,5 +15,4 @@ module AcceptanceHelper
     fill_in 'user[password]', with: user.password
     click_on 'Log in'
   end
-
 end

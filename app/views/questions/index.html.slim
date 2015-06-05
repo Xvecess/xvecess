@@ -1,9 +1,6 @@
-section.container
+hr
   h3 Список вопросов
   -@questions.each do |q|
     br
     div
       =link_to q.title, q
-  br
-  hr
-  = link_to 'Задать вопрос', new_question_path

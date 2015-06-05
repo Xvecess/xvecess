@@ -5,6 +5,7 @@ describe AnswersController do
   let(:answer) { create(:answer, question_id: question.id) }
 
   describe 'GET #new' do
+    sign_in_user
     before { get :new, question_id: question.id }
 
     it 'it sets variable @question  requested question' do
@@ -21,6 +22,7 @@ describe AnswersController do
   end
 
   describe 'POST #create' do
+    sign_in_user
     context ' create answer with valid attributes' do
 
       it 'the answer belong to question and saving in database' do
@@ -49,6 +51,8 @@ describe AnswersController do
   end
 
   describe 'PATCH #update' do
+    sign_in_user
+
     context 'with valid attributes' do
 
       it 'it sets variable @answer  requested answer' do
@@ -86,6 +90,7 @@ describe AnswersController do
   end
 
   describe 'DELETE #destroy' do
+    sign_in_user
     before { answer }
 
     it 'it sets variable @answer  requested question' do

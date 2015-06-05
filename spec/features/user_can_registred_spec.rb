@@ -4,7 +4,7 @@ feature 'User can register', %q{
 To use the site
 quest can register
 } do
-  given!(:user){ create(:user) }
+  given!(:user) { create(:user) }
 
   scenario 'quest enters valid data' do
     sign_up

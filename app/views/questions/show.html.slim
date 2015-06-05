@@ -1,10 +1,11 @@
-section.container.question_answers
+.question_answers
   h3= @question.title
   p
     = @question.body
   br
-  p= link_to 'Редактировать вопрос', edit_question_path(@question)
-  p= link_to 'Удалить вопрос', @question, method: :delete
+  - if user_signed_in? && @question.user == current_user
+    p= link_to 'Редактировать вопрос', edit_question_path(@question)
+    p= link_to 'Удалить вопрос', @question, method: :delete
   p= link_to 'Добавить ответ', new_question_answer_path(@question)
   hr
   div.answers

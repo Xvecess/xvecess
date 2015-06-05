@@ -1,4 +1,5 @@
 class AnswersController < ApplicationController
+  before_action :authenticate_user!
   before_action :load_question, only: [:create, :new, :edit, :destroy]
   before_action :load_answer, only: [:update, :edit, :destroy]
 
@@ -7,7 +8,7 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = @question.answers.new(answer_params)
+    @answer = @question.answers.new(answer_params.merge(user_id: current_user.id))
     if @answer.save
       redirect_to @question, notice: 'Ответ успешно создан'
     else
