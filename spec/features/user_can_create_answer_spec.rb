@@ -27,7 +27,7 @@ feature 'User  an create answers for questions' do
     expect(page).to have_content 'Body can\'t be blank'
   end
 
-  scenario 'Non authenticated user try create answer' do
+  scenario 'non authenticated user try create answer' do
     visit questions_path
     click_on 'MyQuestion'
     expect(current_path).to eq question_path(question)

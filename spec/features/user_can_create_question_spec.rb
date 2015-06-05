@@ -19,7 +19,7 @@ I want to be able to ask question
     expect(page).to have_content 'Ваш вопрос добавлен'
   end
 
-  scenario 'non-authenticated user try created question' do
+  scenario 'non authenticated user try created question' do
      visit questions_path
      expect(page).to have_content question.title
      click_on 'Задать вопрос'

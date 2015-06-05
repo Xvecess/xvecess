@@ -4,13 +4,13 @@ feature 'User Sign In', %q{ Registered users
 can signed site to use it } do
 
   given(:user) { create(:user) }
-  scenario 'Registered user try to signed' do
+  scenario 'registered user try to signed' do
     sign_in(user)
     expect(page).to have_content 'Signed in successfully'
     expect(current_path).to eq  root_path
   end
 
-  scenario 'Non-registered user try to signed' do
+  scenario 'non registered user try to signed' do
     visit new_user_session_path
     fill_in 'user[email]', with: 'wrong@test.com'
     fill_in 'user[password]', with: '12345678'

@@ -14,7 +14,7 @@ quest can register
     expect(page).to have_content 'Welcome! You have signed up successfully'
   end
 
-  scenario 'quest  invalid email' do
+  scenario 'quest enters invalid email' do
     sign_up
     fill_in 'user[email]', with: 'testusertest.com'
     fill_password

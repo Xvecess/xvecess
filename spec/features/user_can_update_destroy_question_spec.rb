@@ -6,7 +6,7 @@ feature 'User can Update and Destroy  his question' do
   given(:user2) { create(:user) }
   given!(:question) { create(:question, user_id: user.id) }
 
-  scenario 'authenticated user  try update his question' do
+  scenario 'authenticated user  try update your question' do
     sign_in(user)
     click_on 'MyQuestion'
     click_on 'Редактировать вопрос'
@@ -16,19 +16,19 @@ feature 'User can Update and Destroy  his question' do
     expect(page).to have_content 'Обновленный текст'
   end
 
-  scenario 'authenticated user try  update not his question' do
+  scenario 'authenticated user try  update not your question' do
     sign_in(user2)
     click_on 'MyQuestion'
     expect(page).to_not have_content 'Редактировать вопрос'
   end
 
-  scenario 'non-authenticated user try  update  question' do
+  scenario 'non authenticated user try  update  question' do
     visit questions_path
     click_on 'MyQuestion'
     expect(page).to_not have_content 'Редактировать вопрос'
   end
 
-  scenario 'authenticated user  destroy his question' do
+  scenario 'authenticated user  destroy your question' do
     sign_in(user)
     click_on 'MyQuestion'
     click_on 'Удалить вопрос'
@@ -36,13 +36,13 @@ feature 'User can Update and Destroy  his question' do
     expect(page).to_not have_content 'MyQuestion'
   end
 
-  scenario 'authenticated user try  destroy not his question' do
+  scenario 'authenticated user try  destroy not your question' do
     sign_in(user2)
     click_on 'MyQuestion'
     expect(page).to_not have_content 'Удалить вопрос'
   end
 
-  scenario 'non-authenticated user try destroy  question' do
+  scenario 'non authenticated user try destroy  question' do
     visit questions_path
     click_on 'MyQuestion'
     expect(page).to_not have_content 'Удалить вопрос'
