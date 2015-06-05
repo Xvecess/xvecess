@@ -10,30 +10,29 @@ html
     meta name="viewport" content="width=device-width, initial-scale=1"
 
   body
-    nav.container.main-nav
-      ul.navigation-links.navbar-default.nav
-        li
-          = link_to 'Вопросы', questions_path
-        li
-          = link_to 'Теги'
-        li
-          = link_to 'Пользователи'
-        li
-          = link_to 'Задать вопрос', new_question_path
-        - if current_user
-          li
-            = link_to 'Редактировать профиль'
-          li
-            = link_to 'Sign Out', destroy_user_session_path, method: :delete
-        -else
-          li
-            = link_to 'Sign in', new_user_session_path
-          li
-            = link_to 'Sign Up', new_user_registration_path
-
-
-    div.container.notices
-      p.notice #{ notice }
-      p.alert #{ alert }
     .container
+      nav.container.main-nav
+        ul.navigation-links.navbar-default.nav
+          li
+            = link_to 'Вопросы', questions_path
+          li
+            = link_to 'Теги'
+          li
+            = link_to 'Пользователи'
+          li
+            = link_to 'Задать вопрос', new_question_path
+          - if current_user
+            li
+              = link_to 'Редактировать профиль'
+            li
+              = link_to 'Sign Out', destroy_user_session_path, method: :delete
+          -else
+            li
+              = link_to 'Sign in', new_user_session_path
+            li
+              = link_to 'Sign Up', new_user_registration_path
+      div.notices
+        p.notice #{ notice }
+        p.alert #{ alert }
+
       = yield
