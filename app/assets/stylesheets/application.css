@@ -28,3 +28,6 @@ ul.navigation-links li {
     font-size: 22px;
     margin-top:20px;
 }
+.new_user {
+    max-width: 200px;
+}

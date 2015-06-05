@@ -7,5 +7,5 @@ section.answer
         p = answer.body
         br
         - if user_signed_in? && answer.user == current_user
-          p = link_to 'Редактировать', edit_question_answer_path(@question, answer)
-          p = link_to 'Удалить', [@question, answer], method: :delete
+          p = link_to 'Редактировать ответ', edit_question_answer_path(@question, answer)
+          p = link_to 'Удалить ответ', [@question, answer], method: :delete
