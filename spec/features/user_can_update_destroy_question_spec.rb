@@ -28,5 +28,23 @@ feature 'User can Update and Destroy  his question' do
     expect(page).to_not have_content 'Редактировать вопрос'
   end
 
+  scenario 'authenticated user  destroy his question' do
+    sign_in(user)
+    click_on 'MyQuestion'
+    click_on 'Удалить вопрос'
+    expect(current_path).to eq questions_path
+    expect(page).to_not have_content 'MyQuestion'
+  end
 
+  scenario 'authenticated user try  destroy not his question' do
+    sign_in(user2)
+    click_on 'MyQuestion'
+    expect(page).to_not have_content 'Удалить вопрос'
+  end
+
+  scenario 'non-authenticated user try destroy  question' do
+    visit questions_path
+    click_on 'MyQuestion'
+    expect(page).to_not have_content 'Удалить вопрос'
+  end
 end
