@@ -1,5 +1,4 @@
 module AcceptanceHelper
-
   def sign_up
     visit new_user_session_path
     click_on 'Sign up'
@@ -10,5 +9,11 @@ module AcceptanceHelper
     fill_in 'user[password_confirmation]', with: 12345678
   end
 
+  def sign_in(user)
+    visit new_user_session_path
+    fill_in 'user[email]', with: user.email
+    fill_in 'user[password]', with: user.password
+    click_on 'Log in'
+  end
 
 end
