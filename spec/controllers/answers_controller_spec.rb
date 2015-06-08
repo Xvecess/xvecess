@@ -83,7 +83,7 @@ describe AnswersController do
     end
 
     context 'with invalid attributes' do
-      
+
       before { patch :update,
                      id: answer, answer: {body: nil} }
 
