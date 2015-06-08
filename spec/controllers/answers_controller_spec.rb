@@ -1,11 +1,14 @@
 require 'rails_helper'
 
 describe AnswersController do
-  let!(:question) { create(:question) }
+
+  let(:user) { create(:user)}
+  let(:question) { create(:question) }
   let(:answer) { create(:answer, question_id: question.id) }
 
   describe 'GET #new' do
     sign_in_user
+
     before { get :new, question_id: question.id }
 
     it 'it sets variable @question  requested question' do
@@ -53,30 +56,35 @@ describe AnswersController do
   describe 'PATCH #update' do
     sign_in_user
 
+    before { answer.update!(user: @user) }
+
     context 'with valid attributes' do
 
-      it 'it sets variable @answer  requested answer' do
-        patch :update, question_id: question.id,
+      before { answer.user = user }
+
+      it 'not change answer, If user is not the owner answer' do
+        patch :update,
               id: answer, answer: attributes_for(:answer)
-        expect(assigns(:answer)).to eq answer
+        expect(answer.body).to eq 'MyAnswer'
       end
 
+
       it 'change answer attributes' do
-        patch :update, question_id: question.id,
-              id: answer, answer: {body: 'new body'}
+        patch :update, id: answer, answer: {body: 'new body'}
         answer.reload
         expect(answer.body).to eq 'new body'
       end
 
       it 'redirect to  question show view' do
-        patch :update, question_id: question.id,
+        patch :update,
               id: answer, answer: attributes_for(:answer)
         expect(response).to redirect_to question
       end
     end
 
     context 'with invalid attributes' do
-      before { patch :update, question_id: question.id,
+      
+      before { patch :update,
                      id: answer, answer: {body: nil} }
 
       it 'do not change answer' do
@@ -91,24 +99,30 @@ describe AnswersController do
 
   describe 'DELETE #destroy' do
     sign_in_user
-    before { answer }
 
-    it 'it sets variable @answer  requested question' do
+    context 'with owner user' do
 
-      delete :destroy, question_id: question.id,
-             id: answer, answer: attributes_for(:answer)
-      expect(assigns(:answer)).to eq answer
+      before { answer.update!(user: @user) }
+
+      it 'delete answer' do
+        expect { delete :destroy,
+                        id: answer }.to change(Answer, :count).by(-1)
+      end
+
+      it 'redirect to questions#show view' do
+        delete :destroy, id: answer
+        expect(response).to redirect_to question
+      end
     end
 
-    it 'delete answer' do
-      expect { delete :destroy, question_id: question.id,
-                      id: answer }.to change(Answer, :count).by(-1)
+    context 'user not owner answer' do
+
+      it 'not destroy answer, If user is not the owner answer' do
+        expect { delete :destroy,
+                        id: answer }.to change(Answer, :count).by(0)
+      end
     end
 
-    it 'redirect to questions#show view' do
-      delete :destroy, question_id: question.id, id: answer
-      expect(response).to redirect_to question
-    end
   end
 end
 

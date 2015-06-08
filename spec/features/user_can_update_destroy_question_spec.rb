@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'User can Update and Destroy  his question' do
+feature 'User can Update and Destroy  your question' do
 
   given!(:user) { create(:user) }
   given(:user2) { create(:user) }
@@ -14,6 +14,7 @@ feature 'User can Update and Destroy  his question' do
     click_on 'Update Question'
     expect(current_path).to eq question_path(question)
     expect(page).to have_content 'Обновленный текст'
+    expect(page).to_not have_content 'MyText'
   end
 
   scenario 'authenticated user try  update not your question' do

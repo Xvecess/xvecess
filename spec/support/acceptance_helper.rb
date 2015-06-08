@@ -5,14 +5,14 @@ module AcceptanceHelper
   end
 
   def fill_password
-    fill_in 'user[password]', with: 12345678
-    fill_in 'user[password_confirmation]', with: 12345678
+    fill_in 'Password', with: 12345678
+    fill_in 'Password confirmation', with: 12345678
   end
 
   def sign_in(user)
     visit new_user_session_path
-    fill_in 'user[email]', with: user.email
-    fill_in 'user[password]', with: user.password
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
     click_on 'Log in'
   end
 end

@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :show]
   before_action :load_question, only: [:show, :edit, :update, :destroy]
+  before_action :question_user_compare, only: [:update, :destroy]
 
   def index
     @questions = Question.all
@@ -43,5 +44,12 @@ class QuestionsController < ApplicationController
 
   def question_params
     params.require(:question).permit(:title, :body)
+  end
+
+  def question_user_compare
+    @question = Question.find(params[:id])
+    if @question.user != current_user.id
+      return root_path, notice: 'Запрещено'
+    end
   end
 end

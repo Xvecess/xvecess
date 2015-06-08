@@ -32,6 +32,6 @@ feature 'User  an create answers for questions' do
     click_on 'MyQuestion'
     expect(current_path).to eq question_path(question)
     click_on 'Добавить ответ'
-    expect(page).to have_content 'Log in'
+    expect(current_path).to eq new_user_session_path
   end
 end

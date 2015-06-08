@@ -3,7 +3,7 @@
   p
     = @question.body
   br
-  - if user_signed_in? && @question.user == current_user
+  - if user_signed_in? && @question.user_id == current_user.id
     p= link_to 'Редактировать вопрос', edit_question_path(@question)
     p= link_to 'Удалить вопрос', @question, method: :delete
   p= link_to 'Добавить ответ', new_question_answer_path(@question)

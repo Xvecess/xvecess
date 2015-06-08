@@ -2,10 +2,13 @@ require 'rails_helper'
 
 describe QuestionsController do
 
+  let(:user) { create(:user) }
   let(:question) { create(:question) }
 
   describe 'GET #index' do
+
     let(:questions) { create_list(:question, 2) }
+
     before { get :index }
 
     it 'populates an array of all questions' do
@@ -19,6 +22,7 @@ describe QuestionsController do
 
   describe 'GET #new' do
     sign_in_user
+
     before { get :new }
 
     it 'assigns @question to be a new question' do
@@ -31,6 +35,7 @@ describe QuestionsController do
   end
 
   describe 'GET #show' do
+
     before { get :show, id: question }
 
     it 'it sets variable @question  requested question' do
@@ -48,6 +53,7 @@ describe QuestionsController do
 
   describe 'GET #edit' do
     sign_in_user
+
     before { get :edit, id: question }
 
     it 'it sets variable @question  requested question' do
@@ -105,10 +111,21 @@ describe QuestionsController do
         expect(question.body).to eq 'new body'
       end
 
+
       it 'redirect to show view' do
         patch :update, id: question, question: attributes_for(:question)
         expect(response).to redirect_to question
       end
+
+      before { question.user = user }
+
+      it 'it not change questions if current user not owner question' do
+        patch :update, id: question,
+              question: {title: 'new title', body: 'new body'}
+        expect(question.title).to eq 'MyQuestion'
+        expect(question.body).to eq 'MyText'
+      end
+
     end
 
     context 'with invalid attributes' do
@@ -128,6 +145,7 @@ describe QuestionsController do
 
   describe 'DELETE #destroy' do
     sign_in_user
+
     before { question }
 
     it 'delete question' do
@@ -137,6 +155,14 @@ describe QuestionsController do
     it 'redirect to questions#index view' do
       delete :destroy, id: question
       expect(response).to redirect_to questions_path
+    end
+
+    before { question.user = user }
+
+    it 'it not destroy questions if current user not owner question' do
+      delete :destroy, id: question
+      expect(question.title).to eq 'MyQuestion'
+      expect(question.body).to eq 'MyText'
     end
   end
 end
