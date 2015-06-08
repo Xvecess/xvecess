@@ -10,7 +10,7 @@ feature 'User  an create answers for questions' do
     click_on 'MyQuestion'
     expect(current_path).to eq question_path(question)
     click_on 'Добавить ответ'
-    fill_in 'Body', with: 'Test Answer'
+    fill_in 'Ответ', with: 'Test Answer'
     click_on 'Save'
     expect(current_path).to eq question_path(question)
     expect(page).to have_content 'Test Answer'
@@ -21,7 +21,7 @@ feature 'User  an create answers for questions' do
     click_on 'MyQuestion'
     expect(current_path).to eq question_path(question)
     click_on 'Добавить ответ'
-    fill_in 'Body', with: ''
+    fill_in 'Ответ', with: ''
     click_on 'Save'
     expect(current_path).to eq question_answers_path(question)
     expect(page).to have_content 'Body can\'t be blank'
