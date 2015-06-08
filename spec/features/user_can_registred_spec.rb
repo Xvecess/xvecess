@@ -12,6 +12,7 @@ quest can register
     fill_in 'Email', with: 'testuser@test.com'
     fill_password
     click_on 'Sign up'
+
     expect(page).to have_content 'Welcome! You have signed up successfully'
   end
 
@@ -21,6 +22,7 @@ quest can register
     fill_in 'Password', with: ''
     fill_in 'Password confirmation', with: ''
     click_on 'Sign up'
+
     expect(page).to have_content 'Password can\'t be blank'
     expect(current_path).to eq user_registration_path
   end

@@ -12,6 +12,7 @@ I want to be able to ask question
   scenario 'authenticated user can see questions list' do
     sign_in(user)
     visit root_path
+
     expect(page).to have_content question.title
   end
 
@@ -22,6 +23,7 @@ I want to be able to ask question
     fill_in 'Title', with: 'Test question'
     fill_in 'Body', with: 'Test Text'
     click_on 'Create Question'
+
     expect(page).to have_content 'Ваш вопрос добавлен'
     expect(page).to have_content 'Test question'
   end
@@ -30,6 +32,7 @@ I want to be able to ask question
     visit questions_path
     expect(page).to have_content question.title
     click_on 'Задать вопрос'
+
     expect(page).to have_content 'You need to sign in or sign up before continuing.'
   end
 

@@ -8,10 +8,10 @@ feature 'User  an create answers for questions' do
   scenario 'authenticated user try create answer' do
     sign_in(user)
     click_on 'MyQuestion'
-    expect(current_path).to eq question_path(question)
     click_on 'Добавить ответ'
     fill_in 'Ответ', with: 'Test Answer'
     click_on 'Save'
+
     expect(current_path).to eq question_path(question)
     expect(page).to have_content 'Test Answer'
   end
@@ -23,6 +23,7 @@ feature 'User  an create answers for questions' do
     click_on 'Добавить ответ'
     fill_in 'Ответ', with: ''
     click_on 'Save'
+
     expect(current_path).to eq question_answers_path(question)
     expect(page).to have_content 'Body can\'t be blank'
   end
@@ -30,7 +31,9 @@ feature 'User  an create answers for questions' do
   scenario 'non authenticated user try create answer' do
     visit questions_path
     click_on 'MyQuestion'
+    expect(current_path).to eq question_path(question)
     click_on 'Добавить ответ'
+
     expect(current_path).to eq new_user_session_path
   end
 end
