@@ -30,7 +30,6 @@ feature 'User  an create answers for questions' do
   scenario 'non authenticated user try create answer' do
     visit questions_path
     click_on 'MyQuestion'
-    expect(current_path).to eq question_path(question)
     click_on 'Добавить ответ'
     expect(current_path).to eq new_user_session_path
   end
