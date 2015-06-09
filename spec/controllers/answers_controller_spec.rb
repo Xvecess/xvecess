@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe AnswersController do
 
-  let(:user) { create(:user)}
-  let(:question) { create(:question) }
-  let(:answer) { create(:answer, question_id: question.id) }
+  let!(:user) { create(:user) }
+  let(:question) { create(:question, user_id: user.id) }
+  let(:answer) { create(:answer, question_id: question.id, user_id: user.id) }
 
   describe 'GET #new' do
     sign_in_user
@@ -26,6 +26,7 @@ describe AnswersController do
 
   describe 'POST #create' do
     sign_in_user
+
     context ' create answer with valid attributes' do
 
       it 'the answer belong to question and saving in database' do
@@ -60,15 +61,6 @@ describe AnswersController do
 
     context 'with valid attributes' do
 
-      before { answer.user = user }
-
-      it 'not change answer, If user is not the owner answer' do
-        patch :update,
-              id: answer, answer: attributes_for(:answer)
-        expect(answer.body).to eq 'MyAnswer'
-      end
-
-
       it 'change answer attributes' do
         patch :update, id: answer, answer: {body: 'new body'}
         answer.reload
@@ -93,6 +85,22 @@ describe AnswersController do
 
       it 're-render edit view' do
         expect(response).to render_template :edit
+      end
+    end
+
+    context 'user not owner answer' do
+
+      before { answer.user = user }
+
+      it 'not change answer, If user is not the owner answer' do
+        patch :update,
+              id: answer, answer: attributes_for(:answer)
+        expect(answer.body).to eq 'MyAnswer'
+      end
+
+      it 'it redirect to if answer not  destroy' do
+        delete :destroy, id: answer
+        expect(response).to redirect_to question
       end
     end
   end
@@ -121,8 +129,11 @@ describe AnswersController do
         expect { delete :destroy,
                         id: answer }.to change(Answer, :count).by(0)
       end
-    end
 
+      it 'it redirect to if answer not  destroy' do
+        delete :destroy, id: answer
+        expect(response).to redirect_to question
+      end
+    end
   end
 end
-

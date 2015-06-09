@@ -6,6 +6,8 @@ describe Question do
 
   it { should validate_presence_of :body }
 
+  it { should validate_presence_of :user_id }
+
   it { should have_many(:answers).dependent(:destroy) }
 
   it { should validate_length_of(:title).

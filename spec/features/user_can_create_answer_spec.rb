@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'User  an create answers for questions' do
 
   given(:user) { create(:user) }
-  given!(:question) { create(:question) }
+  given!(:question) { create(:question, user_id: user.id) }
 
   scenario 'authenticated user try create answer' do
     sign_in(user)

@@ -2,12 +2,12 @@ require 'rails_helper'
 
 describe QuestionsController do
 
-  let(:user) { create(:user) }
-  let(:question) { create(:question) }
+  let!(:user) { create(:user) }
+  let(:question) { create(:question, user_id: user.id) }
 
   describe 'GET #index' do
 
-    let(:questions) { create_list(:question, 2) }
+    let(:questions) { create_list(:question, 2, user_id: user.id) }
 
     before { get :index }
 
@@ -96,6 +96,7 @@ describe QuestionsController do
 
   describe 'PATCH #update' do
     sign_in_user
+
     context 'with valid attributes' do
 
       it 'it sets variable @question  requested question' do
@@ -111,21 +112,10 @@ describe QuestionsController do
         expect(question.body).to eq 'new body'
       end
 
-
       it 'redirect to show view' do
         patch :update, id: question, question: attributes_for(:question)
         expect(response).to redirect_to question
       end
-
-      before { question.user = user }
-
-      it 'it not change questions if current user not owner question' do
-        patch :update, id: question,
-              question: {title: 'new title', body: 'new body'}
-        expect(question.title).to eq 'MyQuestion'
-        expect(question.body).to eq 'MyText'
-      end
-
     end
 
     context 'with invalid attributes' do
@@ -141,28 +131,57 @@ describe QuestionsController do
         expect(response).to render_template :edit
       end
     end
+
+    context 'user not owner question' do
+
+      before { question.user = user }
+
+      it 'it not change questions if current user not owner question' do
+        patch :update, id: question,
+              question: {title: 'new title', body: 'new body'}
+        expect(question.title).to eq 'MyQuestion'
+        expect(question.body).to eq 'MyText'
+      end
+
+      it 'redirect to root if not destroy question' do
+        patch :update, id: question,
+              question: {title: 'new title', body: 'new body'}
+        expect(response).to redirect_to question
+      end
+
+    end
   end
 
   describe 'DELETE #destroy' do
     sign_in_user
 
-    before { question }
+    context 'user owner question' do
 
-    it 'delete question' do
-      expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
+      before { question }
+
+      it 'delete question' do
+        expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
+      end
+
+      it 'redirect to questions#index view' do
+        delete :destroy, id: question
+        expect(response).to redirect_to questions_path
+      end
+
+      before { question.user = user }
     end
 
-    it 'redirect to questions#index view' do
-      delete :destroy, id: question
-      expect(response).to redirect_to questions_path
-    end
+    context 'user not owner question' do
 
-    before { question.user = user }
+      it 'not destroy question, if user is not the owner question' do
+        expect { delete :destroy,
+                        id: question }.to change(Question, :count).by(0)
+      end
 
-    it 'it not destroy questions if current user not owner question' do
-      delete :destroy, id: question
-      expect(question.title).to eq 'MyQuestion'
-      expect(question.body).to eq 'MyText'
+      it 'redirect to if not destroy question' do
+        delete :destroy, id: question
+        expect(response).to redirect_to questions_path
+      end
     end
   end
 end

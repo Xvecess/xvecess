@@ -42,13 +42,13 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body)
+    params.require(:answer).permit(:body,:user_id, :question_id)
   end
 
   def answer_user_compare
     @answer = Answer.find(params[:id])
-    if @answer.id != current_user.id
-      return root_path, notice: 'Запрещено'
+    if @answer.user_id != current_user.id
+      return @question, notice: 'Запрещено'
     end
   end
 end
