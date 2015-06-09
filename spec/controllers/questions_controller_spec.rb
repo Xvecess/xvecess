@@ -97,6 +97,8 @@ describe QuestionsController do
   describe 'PATCH #update' do
     sign_in_user
 
+    before { question.update!(user: @user)}
+
     context 'with valid attributes' do
 
       it 'it sets variable @question  requested question' do
@@ -157,7 +159,7 @@ describe QuestionsController do
 
     context 'user owner question' do
 
-      before { question }
+      before { question.update(user: @user) }
 
       it 'delete question' do
         expect { delete :destroy, id: question }.to change(Question, :count).by(-1)
@@ -167,11 +169,11 @@ describe QuestionsController do
         delete :destroy, id: question
         expect(response).to redirect_to questions_path
       end
-
-      before { question.user = user }
     end
 
     context 'user not owner question' do
+
+      before { question.user = user }
 
       it 'not destroy question, if user is not the owner question' do
         expect { delete :destroy,
@@ -180,7 +182,7 @@ describe QuestionsController do
 
       it 'redirect to if not destroy question' do
         delete :destroy, id: question
-        expect(response).to redirect_to questions_path
+        expect(response).to redirect_to root_url
       end
     end
   end

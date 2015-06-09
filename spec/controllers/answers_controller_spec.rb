@@ -125,6 +125,8 @@ describe AnswersController do
 
     context 'user not owner answer' do
 
+      before { answer.user = user}
+
       it 'not destroy answer, If user is not the owner answer' do
         expect { delete :destroy,
                         id: answer }.to change(Answer, :count).by(0)
@@ -132,7 +134,7 @@ describe AnswersController do
 
       it 'it redirect to if answer not  destroy' do
         delete :destroy, id: answer
-        expect(response).to redirect_to question
+        expect(response).to redirect_to root_url
       end
     end
   end

@@ -49,7 +49,7 @@ class QuestionsController < ApplicationController
   def question_user_compare
     @question = Question.find(params[:id])
     if @question.user_id != current_user.id
-      return @question, notice: 'Запрещено'
+      redirect_to root_url, notice: 'Запрещено'
     end
   end
 end
