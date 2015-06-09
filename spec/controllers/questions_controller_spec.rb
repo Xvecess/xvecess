@@ -78,6 +78,11 @@ describe QuestionsController do
         post :create, question: attributes_for(:question)
         expect(response).to redirect_to questions_path
       end
+
+      it 'question user is the current user' do
+        post :create, question: attributes_for(:question)
+        expect(assigns(:question).user).to eq subject.current_user
+      end
     end
 
     context ' create question with invalid attributes' do
@@ -177,7 +182,7 @@ describe QuestionsController do
 
       it 'not destroy question, if user is not the owner question' do
         expect { delete :destroy,
-                        id: question }.to change(Question, :count).by(0)
+                        id: question }.to_not change(Question, :count)
       end
 
       it 'redirect to if not destroy question' do

@@ -7,15 +7,13 @@ I want to be able to ask question
 } do
 
   given!(:user) { create(:user) }
-  given!(:question) { create(:question, user_id: user.id) }
-  given!(:question2) { create(:question, user_id: user.id) }
+  given!(:questions) { create_list(:question, 2, user_id: user.id) }
 
   scenario 'authenticated user can see questions list' do
     sign_in(user)
     visit root_path
 
-    expect(page).to have_content question.title
-    expect(page).to have_content question2.title
+    expect(page).to have_content 'MyQuestion', count: 2
   end
 
   scenario 'authenticated user try created question' do

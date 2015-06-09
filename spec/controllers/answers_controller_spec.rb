@@ -38,6 +38,11 @@ describe AnswersController do
         post :create, question_id: question.id, answer: attributes_for(:answer)
         expect(response).to redirect_to question
       end
+
+      it 'answer user is the current user' do
+        post :create, question_id: question.id, answer: attributes_for(:answer)
+        expect(assigns(:answer).user).to eq subject.current_user
+      end
     end
 
     context 'create answer with invalid attributes' do
@@ -129,7 +134,7 @@ describe AnswersController do
 
       it 'not destroy answer, If user is not the owner answer' do
         expect { delete :destroy,
-                        id: answer }.to change(Answer, :count).by(0)
+                        id: answer }.to_not change(Answer, :count)
       end
 
       it 'it redirect to if answer not  destroy' do
