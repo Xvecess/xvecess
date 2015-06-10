@@ -2,7 +2,7 @@
   = f.label :body, 'Ответ'
   = f.text_area :body, class: 'form-control'
   br
-  = f.submit 'Save'
+  = f.submit 'Save', class: 'btn btn-success'
   br
   -@answer.errors.full_messages.each do |error|
     ul

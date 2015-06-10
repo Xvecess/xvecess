@@ -8,4 +8,6 @@ section.answer
         br
         - if user_signed_in? && answer.user_id == current_user.id
           p = link_to 'Редактировать ответ', edit_answer_path(answer)
-          p = link_to 'Удалить ответ', answer, method: :delete
+          p = link_to 'Удалить ответ', answer, remote: true,
+                      method: :delete, class: 'delete_answer',
+                      data: { answer_id: answer.id }

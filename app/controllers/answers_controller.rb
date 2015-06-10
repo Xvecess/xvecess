@@ -9,12 +9,8 @@ class AnswersController < ApplicationController
   end
 
   def create
-    @answer = @question.answers.new(answer_params.merge(user: current_user))
-    if @answer.save
-      redirect_to @question, notice: 'Ответ успешно создан'
-    else
-      render :new
-    end
+    @answer = @question.answers.create(answer_params.merge(user: current_user))
+
   end
 
   def update
@@ -26,9 +22,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    if @answer.destroy
-      redirect_to @answer.question, notice: 'Ответ удален'
-    end
+    @answer.destroy
   end
 
   private
