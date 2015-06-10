@@ -6,5 +6,6 @@ section.answer
       div id = answer.id
         p = answer.body
         br
-        p = link_to 'Редактировать', edit_question_answer_path(@question, answer)
-        p = link_to 'Удалить', [@question, answer], method: :delete
+        - if user_signed_in? && answer.user_id == current_user.id
+          p = link_to 'Редактировать ответ', edit_answer_path(answer)
+          p = link_to 'Удалить ответ', answer, method: :delete
