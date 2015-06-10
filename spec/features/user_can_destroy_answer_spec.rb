@@ -7,25 +7,24 @@ feature 'User can Update and Destroy his answer' do
   given(:question) { create(:question, user_id: user.id) }
   given!(:answer) { create(:answer, question_id: question.id, user_id: user.id) }
 
-  scenario 'authenticated user try destroy your answer' do
+  scenario 'authenticated user try destroy your answer', js: true  do
     sign_in(user)
-    click_on 'MyQuestion'
+    visit question_path(question)
+    question.reload
     click_on 'Удалить ответ'
 
-    expect(current_path).to eq question_path(answer.question)
-    expect(page).to_not have_content 'MyAnswer'
+    expect(page).to_not have_content answer.body
   end
 
-  scenario 'authenticated user try destroy not your answer' do
+  scenario 'authenticated user try destroy not your answer', js: true do
     sign_in(user2)
-    click_on 'MyQuestion'
+    visit question_path(question)
 
     expect(page).to_not have_content 'Удалить ответ'
   end
 
   scenario 'non authenticated user try destroy answer' do
-    visit questions_path
-    click_on 'MyQuestion'
+    visit question_path(question)
 
     expect(page).to_not have_content 'Удалить ответ'
   end

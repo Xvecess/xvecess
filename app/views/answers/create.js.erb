@@ -3,6 +3,6 @@
      $("div.answer_errors").html("<%= j error %>");
   <% end %>
 <% else %>
-  $('.answers').html("<%= j render 'answers' %>");
+  $('.answers').html("<%= j render 'questions/answers' %>");
   $("#answer_body").val("");
 <% end %>

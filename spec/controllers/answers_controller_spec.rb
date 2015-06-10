@@ -6,41 +6,20 @@ describe AnswersController do
   let(:question) { create(:question, user_id: user.id) }
   let(:answer) { create(:answer, question_id: question.id, user_id: user.id) }
 
-  describe 'GET #new' do
-    sign_in_user
-
-    before { get :new, question_id: question.id }
-
-    it 'it sets variable @question  requested question' do
-      expect(assigns(:question)).to eq question
-    end
-
-    it 'assigns @answer to be a new answer' do
-      expect(assigns(:answer)).to be_a_new (Answer)
-    end
-
-    it 'render new view' do
-      expect(response).to render_template :new
-    end
-  end
-
   describe 'POST #create' do
     sign_in_user
 
     context ' create answer with valid attributes' do
 
       it 'the answer belong to question and saving in database' do
-        expect { post :create, question_id: question.id, answer: attributes_for(:answer) }
+        expect { post :create, question_id: question.id,
+                      answer: attributes_for(:answer), format: :js}
             .to change(question.answers, :count).by(1)
       end
 
-      it 'redirect to question#show view' do
-        post :create, question_id: question.id, answer: attributes_for(:answer)
-        expect(response).to redirect_to question
-      end
-
       it 'answer user is the current user' do
-        post :create, question_id: question.id, answer: attributes_for(:answer)
+        post :create, question_id: question.id,
+             answer: attributes_for(:answer), format: :js
         expect(assigns(:answer).user).to eq subject.current_user
       end
     end
@@ -48,13 +27,9 @@ describe AnswersController do
     context 'create answer with invalid attributes' do
 
       it 'try save new question, but not save' do
-        expect { post :create, question_id: question.id, answer: attributes_for(:invalid_answer) }
+        expect { post :create, question_id: question.id,
+                      answer: attributes_for(:invalid_answer), format: :js }
             .to_not change(Answer, :count)
-      end
-
-      it 're render new view' do
-        post :create, question_id: question.id, answer: attributes_for(:invalid_answer)
-        expect(response).to render_template :new
       end
     end
   end
@@ -102,11 +77,6 @@ describe AnswersController do
               id: answer, answer: attributes_for(:answer)
         expect(answer.body).to eq 'MyAnswer'
       end
-
-      it 'it redirect to if answer not  destroy' do
-        delete :destroy, id: answer
-        expect(response).to redirect_to question
-      end
     end
   end
 
@@ -119,12 +89,7 @@ describe AnswersController do
 
       it 'delete answer' do
         expect { delete :destroy,
-                        id: answer }.to change(Answer, :count).by(-1)
-      end
-
-      it 'redirect to questions#show view' do
-        delete :destroy, id: answer
-        expect(response).to redirect_to question
+                        id: answer, format: :js }.to change(Answer, :count).by(-1)
       end
     end
 
@@ -134,11 +99,11 @@ describe AnswersController do
 
       it 'not destroy answer, If user is not the owner answer' do
         expect { delete :destroy,
-                        id: answer }.to_not change(Answer, :count)
+                        id: answer, format: :js }.to_not change(Answer, :count)
       end
 
       it 'it redirect to if answer not  destroy' do
-        delete :destroy, id: answer
+        delete :destroy, id: answer , format: :js
         expect(response).to redirect_to root_url
       end
     end

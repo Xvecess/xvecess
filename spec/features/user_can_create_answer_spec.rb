@@ -5,35 +5,36 @@ feature 'User  an create answers for questions' do
   given(:user) { create(:user) }
   given!(:question) { create(:question, user_id: user.id) }
 
-  scenario 'authenticated user try create answer' do
+  scenario 'authenticated user try create answer', js: true do
     sign_in(user)
-    click_on 'MyQuestion'
-    click_on 'Добавить ответ'
-    fill_in 'Ответ', with: 'Test Answer'
+    visit question_path(question)
+
+    fill_in 'Ваш ответ', with: 'Test Answer'
     click_on 'Save'
 
     expect(current_path).to eq question_path(question)
     expect(page).to have_content 'Test Answer'
   end
 
-  scenario 'authenticated user try create answer with blank body' do
+  scenario 'authenticated user try create answer with blank body',js: true do
     sign_in(user)
-    click_on 'MyQuestion'
+    visit question_path(question)
+
     expect(current_path).to eq question_path(question)
-    click_on 'Добавить ответ'
-    fill_in 'Ответ', with: ''
+
+    fill_in 'Ваш ответ', with: ''
     click_on 'Save'
 
-    expect(current_path).to eq question_answers_path(question)
+    expect(current_path).to eq question_path(question)
     expect(page).to have_content 'Body can\'t be blank'
   end
 
-  scenario 'non authenticated user try create answer' do
-    visit questions_path
-    click_on 'MyQuestion'
-    expect(current_path).to eq question_path(question)
-    click_on 'Добавить ответ'
+  scenario 'non authenticated user try create answer'  do
+    visit question_path(question)
 
-    expect(current_path).to eq new_user_session_path
+    within ('.question_answers') do
+      expect(page).to_not have_content 'Ваш ответ'
+      expect(page).to_not have_content 'Save'
+    end
   end
 end

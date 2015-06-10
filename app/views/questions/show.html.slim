@@ -8,13 +8,12 @@
     p= link_to 'Удалить вопрос', @question, method: :delete
   hr
   div.answers
-
-    = render 'answers/answers'
+    = render 'answers'
 
   - if user_signed_in?
     = form_for [@question, @answer], remote: true, html: {class: 'form-horizontal'} do |f|
       div.answer_errors
-      = f.label :body, 'Ответ'
+      = f.label :body, 'Ваш ответ'
       = f.text_area :body, class: 'form-control'
       br
       = f.submit 'Save', class: 'btn btn-success'

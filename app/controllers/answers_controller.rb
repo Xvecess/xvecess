@@ -1,16 +1,11 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
-  before_action :load_question, only: [:create, :new]
+  before_action :load_question, only: [:create]
   before_action :load_answer, only: [:update, :edit, :destroy]
   before_action :answer_user_compare, only: [:update, :destroy]
 
-  def new
-    @answer = @question.answers.new
-  end
-
   def create
     @answer = @question.answers.create(answer_params.merge(user: current_user))
-
   end
 
   def update
