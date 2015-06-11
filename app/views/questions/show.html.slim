@@ -6,7 +6,17 @@
   - if user_signed_in? && @question.user_id == current_user.id
     p= link_to 'Редактировать вопрос', edit_question_path(@question)
     p= link_to 'Удалить вопрос', @question, method: :delete
-  p= link_to 'Добавить ответ', new_question_answer_path(@question)
   hr
+
   div.answers
-    = render 'answers/answers'
+    H3 Ответы
+    = render @question.answers
+
+  - if user_signed_in?
+    = form_for [@question, @answer], remote: true, html: {class: 'form-horizontal'} do |f|
+      .answer_errors
+      = f.label :body, 'Ваш ответ'
+      = f.text_area :body, class: 'form-control'
+      br
+      = f.submit 'Save', class: 'btn btn-success'
+      br
