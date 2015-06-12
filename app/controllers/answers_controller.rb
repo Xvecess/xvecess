@@ -9,15 +9,18 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if @answer.update(answer_params)
-      redirect_to @answer.question, notice: 'Ответ обновлен'
-    else
-      render :edit
-    end
+     @answer.update(answer_params)
+     @question = @answer.question
   end
 
   def destroy
     @answer.destroy
+  end
+
+  def correct_answer
+    @question = answer.question
+    @question.correct_answer = answer
+
   end
 
   private

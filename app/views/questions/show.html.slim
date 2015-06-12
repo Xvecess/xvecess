@@ -1,22 +1,23 @@
 .question_answers
-  h3= @question.title
-  p
-    = @question.body
-  br
-  - if user_signed_in? && @question.user_id == current_user.id
-    p= link_to 'Редактировать вопрос', edit_question_path(@question)
-    p= link_to 'Удалить вопрос', @question, method: :delete
-  hr
+  .question_show
+    h3= @question.title
+    p
+      = @question.body
+    br
+    - if user_signed_in? && @question.user_id == current_user.id
+      p= link_to 'Редактировать вопрос', edit_question_path(@question)
+      p= link_to 'Удалить вопрос', @question, method: :delete
+    p Вопрос задан #{ @question.created_at.to_formatted_s(:long)} пользователем #{ @question.user.email}
 
   div.answers
     H3 Ответы
     = render @question.answers
 
   - if user_signed_in?
-    = form_for [@question, @answer], remote: true, html: {class: 'form-horizontal'} do |f|
+    = form_for [@question, @answer], remote: true, html: {class: 'form-horizontal new_answer'} do |f|
       .answer_errors
-      = f.label :body, 'Ваш ответ'
+      = f.label :body, 'Новый ответ'
       = f.text_area :body, class: 'form-control'
       br
-      = f.submit 'Save', class: 'btn btn-success'
+      = f.submit 'Save', class: 'btn btn-default'
       br

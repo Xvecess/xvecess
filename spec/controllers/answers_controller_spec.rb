@@ -42,29 +42,19 @@ describe AnswersController do
     context 'with valid attributes' do
 
       it 'change answer attributes' do
-        patch :update, id: answer, answer: {body: 'new body'}
+        patch :update, id: answer, format: :js, answer: {body: 'new body'}
         answer.reload
         expect(answer.body).to eq 'new body'
-      end
-
-      it 'redirect to  question show view' do
-        patch :update,
-              id: answer, answer: attributes_for(:answer)
-        expect(response).to redirect_to question
       end
     end
 
     context 'with invalid attributes' do
 
       before { patch :update,
-                     id: answer, answer: {body: nil} }
+                     id: answer, format: :js, answer: {body: nil} }
 
       it 'do not change answer' do
         expect(answer.body).to eq 'MyAnswer'
-      end
-
-      it 're-render edit view' do
-        expect(response).to render_template :edit
       end
     end
 
@@ -74,7 +64,7 @@ describe AnswersController do
 
       it 'not change answer, If user is not the owner answer' do
         patch :update,
-              id: answer, answer: attributes_for(:answer)
+              id: answer,format: :js, answer: attributes_for(:answer)
         expect(answer.body).to eq 'MyAnswer'
       end
     end
