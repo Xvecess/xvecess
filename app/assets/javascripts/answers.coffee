@@ -13,6 +13,15 @@ ready = ->
     answer_id = $(this).data('answerId')
     $('form#edit-answer-' + answer_id).show();
 
+#   $('.best-answer').click (e) ->
+#     e.preventDefault();
+#     answer_id = $(this).data('answerId')
+#     $.ajax
+#       url: 'answers/'+ best_answer + 'best_answer'
+#       dataType: 'html'
+#
+
+
 $(document).ready(ready)
 $(document).on('page:load', ready)
 $(document).on('page:update', ready)

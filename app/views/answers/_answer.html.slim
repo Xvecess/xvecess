@@ -2,6 +2,7 @@ section.answer
   - if answer.persisted?
     br
     div id = answer.id
+
       p Ответ #{answer.created_at.to_formatted_s(:long)} пользователем #{answer.user.email}
       p = answer.body
       br
@@ -18,7 +19,9 @@ section.answer
           br
           .update_errors
           = f.submit 'Update', class: ' btn btn-success'
-        - if answer.question.user_id == current_user.id
+        - if answer.best
+          p.set-best-answer Пользователь #{answer.user.email}  отметил ответ как лучший
+        - else
           p
-            =link_to 'Этот лучший ответ', correct_answer_path(answer), remote: true,
-                     class: 'right-answer', data: {answer_id: answer.id}
+            =link_to 'Пометить как лучший ответ', best_answer_answer_path(answer), method: :post,
+                     class: 'best-answer', data: {answer_id: answer.id}

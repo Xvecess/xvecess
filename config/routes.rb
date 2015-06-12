@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   resources :questions do
     resources :answers, shallow: true do
-        post 'correct', on: :member
+        post 'best_answer', on: :member
     end
   end
 

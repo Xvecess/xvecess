@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_question, only: [:create]
-  before_action :load_answer, only: [:update, :edit, :destroy]
+  before_action :load_answer, only: [:update, :edit, :destroy, :best_answer]
   before_action :answer_user_compare, only: [:update, :destroy]
 
   def create
@@ -17,10 +17,9 @@ class AnswersController < ApplicationController
     @answer.destroy
   end
 
-  def correct_answer
-    @question = answer.question
-    @question.correct_answer = answer
-
+  def best_answer
+   @answer.set_best_answer
+    redirect_to @answer.question
   end
 
   private
