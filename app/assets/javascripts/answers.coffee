@@ -13,13 +13,8 @@ ready = ->
     answer_id = $(this).data('answerId')
     $('form#edit-answer-' + answer_id).show();
 
-#   $('.best-answer').click (e) ->
-#     e.preventDefault();
-#     answer_id = $(this).data('answerId')
-#     $.ajax
-#       url: 'answers/'+ best_answer + 'best_answer'
-#       dataType: 'html'
-#
+  $('.set-best-answer').parent().addClass('set_best_answer')
+
 
 
 $(document).ready(ready)

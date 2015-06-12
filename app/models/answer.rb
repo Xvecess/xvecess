@@ -7,7 +7,11 @@ class Answer < ActiveRecord::Base
   validates :body, :user_id, :question_id, presence: true
 
   def set_best_answer
-    unless question.has_best_answer?
+    if question.has_best_answer?
+      answer = question.answers.find_by(best: true)
+      answer.update_attributes(best: false)
+      update_attributes(best: true)
+    else
       update_attributes(best: true)
     end
   end

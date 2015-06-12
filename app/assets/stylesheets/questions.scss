@@ -5,7 +5,20 @@
   max-width: 400px;
 }
 
+.questions-list {
+  font-size: 20px;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.question-title {
+  margin-bottom: 30px;
+}
+
 .question_show {
   margin-bottom: 40px;
-  border-bottom: 1px solid black;
+  border: 1px solid black;
+  background-color: #CCCCCC;
+  padding: 10px;
+  border-radius: 5px;
 }
