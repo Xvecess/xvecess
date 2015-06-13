@@ -104,6 +104,8 @@ describe AnswersController do
 
     context 'with  best equal false' do
 
+      before { answer.update!(best: false) }
+
       it 'sets answer best on true' do
         post :best_answer, id: answer
         answer.reload

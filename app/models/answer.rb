@@ -10,9 +10,7 @@ class Answer < ActiveRecord::Base
     if question.has_best_answer?
       answer = question.answers.find_by(best: true)
       answer.update_attributes(best: false)
-      update_attributes(best: true)
-    else
-      update_attributes(best: true)
     end
+    update_attributes(best: true)
   end
 end

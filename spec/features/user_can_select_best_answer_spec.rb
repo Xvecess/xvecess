@@ -14,7 +14,7 @@ The users were asked the question can
     sign_in(user)
     visit question_path(question)
     click_on 'Это лучший ответ'
-
+    
     expect(page).to have_content "Пользователь #{question.user.email} отметил этот ответ, как лучший"
   end
 end
