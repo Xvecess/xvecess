@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe AnswersController do
 
-  let!(:user) { create(:user) }
+  let(:user) { create(:user) }
   let(:question) { create(:question, user_id: user.id) }
-  let(:answer) { create(:answer, question_id: question.id, user_id: user.id) }
+  let!(:answer) { create(:answer, question_id: question.id, user_id: user.id, best: false) }
 
   describe 'POST #create' do
     sign_in_user
@@ -95,6 +95,34 @@ describe AnswersController do
       it 'it redirect to if answer not  destroy' do
         delete :destroy, id: answer , format: :js
         expect(response).to redirect_to root_url
+      end
+    end
+  end
+
+  describe 'POST #best_answer' do
+    sign_in_user
+
+    context 'with  best equal false' do
+
+      it 'sets answer best on true' do
+        post :best_answer, id: answer
+        answer.reload
+        expect(answer.best).to be true
+      end
+
+      it 'redirect answer.question view' do
+        post :best_answer, id: answer
+        expect(response).to redirect_to question_path(answer.question)
+      end
+    end
+    context 'with best equal true' do
+
+      before { answer.update!(best: true) }
+
+      it 'sets answer best on true' do
+        post :best_answer, id: answer
+        answer.reload
+        expect(answer.best).to be false
       end
     end
   end

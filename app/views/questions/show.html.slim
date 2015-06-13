@@ -3,7 +3,6 @@
     h3= @question.title
     p
       = @question.body
-    br
     - if user_signed_in? && @question.user_id == current_user.id
       p= link_to 'Редактировать вопрос', edit_question_path(@question)
       p= link_to 'Удалить вопрос', @question, method: :delete
@@ -19,5 +18,4 @@
       = f.label :body, 'Новый ответ'
       = f.text_area :body, class: 'form-control'
       br
-      = f.submit 'Save', class: 'btn btn-default'
-      br
+      = f.submit 'Save', class: 'btn btn-save'
