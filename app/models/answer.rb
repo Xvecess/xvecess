@@ -4,7 +4,10 @@ class Answer < ActiveRecord::Base
 
   belongs_to :question
   belongs_to :user
+  has_many :attachments , dependent: :destroy, as: :attachable
   validates :body, :user_id, :question_id, presence: true
+
+  accepts_nested_attributes_for :attachments
 
   def set_best_answer
     if question.has_best_answer?

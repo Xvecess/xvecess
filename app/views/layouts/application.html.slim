@@ -32,7 +32,7 @@ html
             li
               = link_to 'Sign Up', new_user_registration_path
       section.notices
-        p.notice #{ notice }
-        p.alert #{ alert }
+        p.notice.alert-info #{ notice }
+        p.alert-error #{ alert }
 
       = yield

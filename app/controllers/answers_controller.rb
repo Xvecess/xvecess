@@ -33,7 +33,7 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body,:user_id, :question_id)
+    params.require(:answer).permit(:body,:user_id, :question_id, attachments_attributes: [:file])
   end
 
   def answer_user_compare

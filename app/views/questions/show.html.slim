@@ -3,6 +3,12 @@
     h3= @question.title
     p
       = @question.body
+    p.attachments Прикрепленные файлы
+    ul
+      -@question.attachments.each do |a|
+        li
+          = link_to a.file.filename, a.file_url
+
     - if user_signed_in? && @question.user_id == current_user.id
       p= link_to 'Редактировать вопрос', edit_question_path(@question)
       p= link_to 'Удалить вопрос', @question, method: :delete
@@ -17,5 +23,9 @@
       .answer_errors
       = f.label :body, 'Новый ответ'
       = f.text_area :body, class: 'form-control'
+      p.file-input
+        = f.fields_for :attachments do |a|
+          = a.label :file, 'Добавить файл'
+          = a.file_field :file
       br
       = f.submit 'Save', class: 'btn btn-save'

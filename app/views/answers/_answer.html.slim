@@ -4,6 +4,11 @@
       p.set-best-answer Пользователь #{answer.question.user.email} отметил этот ответ, как лучший
     p Ответ #{answer.created_at.to_formatted_s(:long)} пользователем #{answer.user.email}
     p = answer.body
+    p.attachments Прикрепленные файлы
+    ul
+      -answer.attachments.each do |a|
+        li
+          = link_to a.file.filename, a.file_url
 
     - if user_signed_in? && answer.user_id == current_user.id
       p = link_to 'Редактировать ответ', '', class: 'edit_answer-link', data: {answer_id: answer.id}
