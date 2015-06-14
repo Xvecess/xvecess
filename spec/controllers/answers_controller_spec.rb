@@ -2,9 +2,9 @@ require 'rails_helper'
 
 describe AnswersController do
 
-  let!(:user) { create(:user) }
+  let(:user) { create(:user) }
   let(:question) { create(:question, user_id: user.id) }
-  let(:answer) { create(:answer, question_id: question.id, user_id: user.id) }
+  let!(:answer) { create(:answer, question_id: question.id, user_id: user.id, best: false) }
 
   describe 'POST #create' do
     sign_in_user
@@ -42,29 +42,19 @@ describe AnswersController do
     context 'with valid attributes' do
 
       it 'change answer attributes' do
-        patch :update, id: answer, answer: {body: 'new body'}
+        patch :update, id: answer, format: :js, answer: {body: 'new body'}
         answer.reload
         expect(answer.body).to eq 'new body'
-      end
-
-      it 'redirect to  question show view' do
-        patch :update,
-              id: answer, answer: attributes_for(:answer)
-        expect(response).to redirect_to question
       end
     end
 
     context 'with invalid attributes' do
 
       before { patch :update,
-                     id: answer, answer: {body: nil} }
+                     id: answer, format: :js, answer: {body: nil} }
 
       it 'do not change answer' do
         expect(answer.body).to eq 'MyAnswer'
-      end
-
-      it 're-render edit view' do
-        expect(response).to render_template :edit
       end
     end
 
@@ -74,7 +64,7 @@ describe AnswersController do
 
       it 'not change answer, If user is not the owner answer' do
         patch :update,
-              id: answer, answer: attributes_for(:answer)
+              id: answer,format: :js, answer: attributes_for(:answer)
         expect(answer.body).to eq 'MyAnswer'
       end
     end
@@ -105,6 +95,36 @@ describe AnswersController do
       it 'it redirect to if answer not  destroy' do
         delete :destroy, id: answer , format: :js
         expect(response).to redirect_to root_url
+      end
+    end
+  end
+
+  describe 'POST #best_answer' do
+    sign_in_user
+
+    context 'with  best equal false' do
+
+      before { answer.update!(best: false) }
+
+      it 'sets answer best on true' do
+        post :best_answer, id: answer
+        answer.reload
+        expect(answer.best).to be true
+      end
+
+      it 'redirect answer.question view' do
+        post :best_answer, id: answer
+        expect(response).to redirect_to question_path(answer.question)
+      end
+    end
+    context 'with best equal true' do
+
+      before { answer.update!(best: true) }
+
+      it 'sets answer best on true' do
+        post :best_answer, id: answer
+        answer.reload
+        expect(answer.best).to be false
       end
     end
   end

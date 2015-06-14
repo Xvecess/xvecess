@@ -9,7 +9,7 @@ feature 'User  an create answers for questions' do
     sign_in(user)
     visit question_path(question)
 
-    fill_in 'Ваш ответ', with: 'Test Answer'
+    fill_in 'Новый ответ', with: 'Test Answer'
     click_on 'Save'
 
     expect(current_path).to eq question_path(question)
@@ -22,7 +22,7 @@ feature 'User  an create answers for questions' do
 
     expect(current_path).to eq question_path(question)
 
-    fill_in 'Ваш ответ', with: ''
+    fill_in 'Новый ответ', with: ''
     click_on 'Save'
 
     expect(current_path).to eq question_path(question)

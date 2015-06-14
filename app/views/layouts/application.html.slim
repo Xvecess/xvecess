@@ -11,7 +11,7 @@ html
 
   body
     .container
-      nav.container.main-nav
+      nav.container.main-nav.row
         ul.navigation-links.navbar-default.nav
           li
             = link_to 'Вопросы', questions_path
@@ -31,7 +31,7 @@ html
               = link_to 'Sign in', new_user_session_path
             li
               = link_to 'Sign Up', new_user_registration_path
-      div.notices
+      section.notices
         p.notice #{ notice }
         p.alert #{ alert }
 

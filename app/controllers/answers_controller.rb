@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_question, only: [:create]
-  before_action :load_answer, only: [:update, :edit, :destroy]
+  before_action :load_answer, only: [:update, :destroy, :best_answer]
   before_action :answer_user_compare, only: [:update, :destroy]
 
   def create
@@ -9,15 +9,17 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if @answer.update(answer_params)
-      redirect_to @answer.question, notice: 'Ответ обновлен'
-    else
-      render :edit
-    end
+     @answer.update(answer_params)
+     @question = @answer.question
   end
 
   def destroy
     @answer.destroy
+  end
+
+  def best_answer
+   @answer.set_best_answer
+    redirect_to @answer.question
   end
 
   private
