@@ -1,4 +1,4 @@
-require 'rails_helper'
+require_relative 'acceptance_helper'
 
 feature 'User Sign In', %q{ Registered users
 can signed site to use it } do
