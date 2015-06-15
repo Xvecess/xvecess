@@ -21,7 +21,7 @@ describe Question do
 
   it { should belong_to :user }
 
-  it {should accept_nested_attributes_for :attachments}
+  it { should accept_nested_attributes_for :attachments }
 
   describe 'question has best answer ?' do
 
@@ -34,4 +34,11 @@ describe Question do
       expect(question.has_best_answer?).to be false
     end
   end
+
+  describe 'question not have attachment' do
+    it 'expecting true if no have attachment' do
+      expect(question.not_have_attachment(answer: ['file'])).to eq true
+    end
+  end
 end
+
