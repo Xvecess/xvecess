@@ -30,6 +30,6 @@ feature 'Ad files to question' do
     click_on 'Test question'
 
     expect(page).to have_content 'spec_helper.rb'
-    expect(page).to have_content 'spec_helper.rb'
+    expect(page).to have_content 'rails_helper.rb'
   end
 end
