@@ -39,3 +39,15 @@ textarea {
   color: red;
   margin-bottom: 10px;
 }
+
+ul.attached-files {
+  list-style: none;
+}
+
+.row.attached-file {
+  margin: 10px 0;
+}
+.row.attached-file a{
+  display: inline-block;
+  padding-right: 10px;
+}

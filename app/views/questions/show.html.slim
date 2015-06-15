@@ -4,11 +4,15 @@
     p
       = @question.body
     -unless @question.attachments.blank?
-      p.attachments Прикрепленные файлы
-      ul
+      p.attachments-title Прикрепленные файлы
+      ul.attached-files
         -@question.attachments.each do |a|
           li
-            = link_to a.file.filename, a.file_url
+            .row.attached-file
+              .col-md-7
+                = link_to a.file.filename, a.file_url
+                - if @question.user_id == current_user.id
+                  = link_to 'Удалить файл'
 
     - if user_signed_in? && @question.user_id == current_user.id
       p= link_to 'Редактировать вопрос', edit_question_path(@question)
