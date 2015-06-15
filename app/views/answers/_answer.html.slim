@@ -5,15 +5,15 @@
     p Ответ #{answer.created_at.to_formatted_s(:long)} пользователем #{answer.user.email}
     p = answer.body
     -unless answer.attachments.blank?
-      p.attachments Прикрепленные файлы
       ul.attached-files
         -answer.attachments.each do |a|
           li
-            .row.attached-file
-              .col-md-7
+            .row.attached-file id = a.id
+              .col-md-7g
                 = link_to a.file.filename, a.file_url
                 - if answer.user_id == current_user.id
-                  = link_to 'Удалить файл'
+                  = link_to 'Удалить файл', a,remote: true, method: :delete,
+                            class: 'delete_attachment', data: {attachment_id: a.id}
 
     - if user_signed_in? && answer.user_id == current_user.id
       p = link_to 'Редактировать ответ', '', class: 'edit_answer-link', data: {answer_id: answer.id}

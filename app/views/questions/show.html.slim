@@ -4,7 +4,6 @@
     p
       = @question.body
     -unless @question.attachments.blank?
-      p.attachments-title Прикрепленные файлы
       ul.attached-files
         -@question.attachments.each do |a|
           li
