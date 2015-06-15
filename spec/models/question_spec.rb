@@ -36,8 +36,9 @@ describe Question do
   end
 
   describe 'question not have attachment' do
+
     it 'expecting true if no have attachment' do
-      expect(question.not_have_attachment(answer: ['file'])).to eq true
+      expect(question.not_have_attachment(question: ['file'])).to eq true
     end
   end
 end
