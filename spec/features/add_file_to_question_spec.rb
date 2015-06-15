@@ -10,6 +10,7 @@ feature 'Ad files to question' do
   end
 
   scenario 'user ads file when ask question' do
+
     fill_in 'Title', with: 'Test question'
     fill_in 'Body', with: 'Test Text'
     attach_file 'question_attachments_attributes_0_file', "#{Rails.root}/spec/spec_helper.rb"
@@ -20,6 +21,7 @@ feature 'Ad files to question' do
   end
 
   scenario 'user ads also some file when ask question', js: true do
+
     fill_in 'Title', with: 'Test question'
     fill_in 'Body', with: 'Test Text'
 

@@ -6,6 +6,13 @@
   margin-bottom: 20px;
 }
 
+.answer_errors {
+  list-style: none;
+  color: red;
+  padding: 5px;
+  font-size: 15px;
+}
+
 .edit_answer {
   display: none;
 }

@@ -6,7 +6,7 @@
     -unless @question.attachments.blank?
       ul.attached-files
         -@question.attachments.each do |a|
-          = render 'attachments/attached', a: a
+          = render 'attachments/attached', a: a, subject: @question
 
     - if user_signed_in? && @question.user_id == current_user.id
       p= link_to 'Редактировать вопрос', edit_question_path(@question)

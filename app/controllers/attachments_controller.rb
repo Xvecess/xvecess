@@ -4,6 +4,7 @@ class AttachmentsController < ApplicationController
 
   def destroy
     @attachment.destroy
+    render nothing: true
   end
 
   private

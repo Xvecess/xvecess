@@ -7,7 +7,7 @@
     -unless answer.attachments.blank?
       ul.attached-files
         -answer.attachments.each do |a|
-          = render 'attachments/attached', a: a
+          = render 'attachments/attached', a: a, subject: answer
 
     - if user_signed_in? && answer.user_id == current_user.id
       p = link_to 'Редактировать ответ', '', class: 'edit_answer-link', data: {answer_id: answer.id}
