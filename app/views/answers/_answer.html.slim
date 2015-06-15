@@ -14,14 +14,14 @@
       p = link_to 'Удалить ответ', answer, remote: true,
                   method: :delete, class: 'delete_answer',
                   data: {answer_id: answer.id}
-
-      p = form_for answer, remote: true, html: {class: 'form-horizontal edit_answer',
-                                                id: "edit-answer-#{answer.id}"} do |f|
-        = f.label :body, 'Редактирование ответа'
-        = f.text_area :body, class: 'form-control'
-        .update_errors
-        br
-        = f.submit 'Update', class: ' btn btn-success'
+      .container
+        = simple_form_for answer, remote: true, html: {class: 'form-horizontal edit_answer',
+                                                       id: "edit-answer-#{answer.id}"} do |f|
+          = f.label :body, 'Редактирование ответа'
+          = f.input :body, input_html: {rows: 5}, label: false
+          .update_errors
+            br
+          = f.submit 'Update', class: ' btn btn-success'
 
     - if user_signed_in?
       - if answer.question.user_id == current_user.id && !answer.best

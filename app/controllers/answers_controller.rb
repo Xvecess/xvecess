@@ -9,8 +9,8 @@ class AnswersController < ApplicationController
   end
 
   def update
-     @answer.update(answer_params)
-     @question = @answer.question
+    @answer.update(answer_params)
+    @question = @answer.question
   end
 
   def destroy
@@ -18,7 +18,7 @@ class AnswersController < ApplicationController
   end
 
   def best_answer
-   @answer.set_best_answer
+    @answer.set_best_answer
     redirect_to @answer.question
   end
 
@@ -33,7 +33,7 @@ class AnswersController < ApplicationController
   end
 
   def answer_params
-    params.require(:answer).permit(:body,:user_id, :question_id, attachments_attributes: [:file])
+    params.require(:answer).permit(:body, :user_id, :question_id, attachments_attributes: [:file])
   end
 
   def answer_user_compare
