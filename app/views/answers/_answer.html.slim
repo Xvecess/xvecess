@@ -7,13 +7,7 @@
     -unless answer.attachments.blank?
       ul.attached-files
         -answer.attachments.each do |a|
-          li
-            .row.attached-file id = a.id
-              .col-md-7g
-                = link_to a.file.filename, a.file_url
-                - if answer.user_id == current_user.id
-                  = link_to 'Удалить файл', a,remote: true, method: :delete,
-                            class: 'delete_attachment', data: {attachment_id: a.id}
+          = render 'attachments/attached', a: a
 
     - if user_signed_in? && answer.user_id == current_user.id
       p = link_to 'Редактировать ответ', '', class: 'edit_answer-link', data: {answer_id: answer.id}
