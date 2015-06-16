@@ -28,7 +28,7 @@ RSpec.configure do |config|
     DatabaseCleaner.clean
   end
 
-  config.after(:all) do
+  config.after(:each) do
     if Rails.env.test?
       FileUtils.rm_rf(Dir["#{Rails.root}/public/uploads"])
     end

@@ -5,8 +5,8 @@
   = f.simple_fields_for :attachments do |a|
     = render 'questions/attachment_fields', f: a
     .row.add-file
-      = link_to_add_association 'Добавить еще файл', f, :attachments,class: 'btn btn-default btn-xs',
-                              data: {association_insertion_node: '.nested-fields:last',
-                                     association_insertion_method: 'after'}
+      = link_to_add_association 'Добавить еще файл', f, :attachments, class: 'btn btn-default btn-xs',
+                                data: {association_insertion_node: '.nested-fields:last',
+                                       association_insertion_method: 'after'}
   .form-group
-    = f.button :submit,:disable_with => 'Please wait ...', class: 'btn btn-default'
+    = f.button :submit, disable_with: 'Please wait ...', class: 'btn btn-default'
