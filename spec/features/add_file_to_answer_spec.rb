@@ -13,15 +13,15 @@ feature 'Ad files to answer' do
   scenario 'user ads file when write answer', js: true do
 
     fill_in 'Новый ответ', with: 'Test Answer'
-    find('.nested-fields input').set("#{Rails.root}/spec/spec_helper.rb")
+    find('.nested-fields input').set("#{Rails.root}/spec/models/user_spec.rb")
     click_on 'Save'
 
     within 'div.answers' do
-      expect(page).to have_link 'spec_helper.rb', href: '/uploads/attachment/file/1/spec_helper.rb'
+      expect(page).to have_content 'user_spec.rb'
     end
   end
 
-  scenario 'user ads also some file when write answer', js: true do
+  scenario 'user ad more some file when write answer', js: true do
 
     fill_in 'Новый ответ', with: 'Test Answer'
     find('.nested-fields input').set("#{Rails.root}/spec/spec_helper.rb")

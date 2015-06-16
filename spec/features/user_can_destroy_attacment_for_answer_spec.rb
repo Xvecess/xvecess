@@ -6,7 +6,6 @@
 #   given(:question) { create(:question, user_id: user.id) }
 #
 #   background do
-#
 #     sign_in(user)
 #     visit question_path(question)
 #     fill_in 'Новый ответ', with: 'Test Answer'
@@ -18,8 +17,8 @@
 #
 #     within 'div.row.attached-file' do
 #       click_on 'Удалить файл'
-#       question.reload
-#       expect(page).to_not have_content 'rails_helper.rb'
 #     end
+#
+#     expect(page).to_not have_content 'rails_helper.rb'
 #   end
 # end
