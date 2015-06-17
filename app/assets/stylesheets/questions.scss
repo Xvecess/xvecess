@@ -5,6 +5,10 @@
   max-width: 400px;
 }
 
+textarea {
+  resize: none;
+}
+
 .questions-list {
   font-size: 20px;
   padding: 5px;
@@ -21,4 +25,34 @@
   background-color: #CCCCCC;
   padding: 10px;
   border-radius: 5px;
+}
+
+.nested-fields {
+  margin-top: 20px;
+}
+
+.add-file {
+  margin-bottom: 20px;
+}
+
+.file-name {
+  color: red;
+  margin-bottom: 10px;
+}
+
+ul.attached-files {
+  list-style: none;
+}
+
+.row.attached-file {
+  margin: 10px 0;
+}
+
+.row.attached-file a {
+  display: inline-block;
+  padding-right: 10px;
+}
+
+.add_file {
+  display: none;
 }

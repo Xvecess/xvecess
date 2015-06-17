@@ -1,14 +1,12 @@
-= form_for @question, html: { class: 'form-horizontal question'} do |f|
-  h4 Ваш вопрос
-  p
-    = f.label :title
-    = f.text_field :title, class: 'form-control'
-  p
-    = f.label :body
-    = f.text_area :body, class: 'form-control'
-  p
-    = f.submit
-
-  -@question.errors.full_messages.each do |error|
-    ul
-      li = error
+= simple_form_for @question, html: {class: 'form-horizontal question'} do |f|
+  h4 Задайте вопрос
+  = f.input :title
+  = f.input :body, input_html: {rows: 10}
+  = f.simple_fields_for :attachments do |a|
+    = render 'questions/attachment_fields', f: a
+    .row.add-file
+      = link_to_add_association 'Добавить еще файл', f, :attachments, class: 'btn btn-default btn-xs',
+                                data: {association_insertion_node: '.nested-fields:last',
+                                       association_insertion_method: 'after'}
+  .form-group
+    = f.button :submit, disable_with: 'Please wait ...', class: 'btn btn-default'

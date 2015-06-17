@@ -1,0 +1,11 @@
+.nested-fields
+  - if f.object.file?
+    .file-name
+      = f.object.file.filename
+  .row.file
+    .col-md-10
+      = f.input :file, label: false, class: 'form-control'
+    .col-md-2
+      = link_to_remove_association 'Удалить', f,
+                                   data: { confirm: 'do you really want to do this?'},
+                                   class: 'btn btn-default btn-xs'

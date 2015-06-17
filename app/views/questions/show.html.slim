@@ -3,6 +3,11 @@
     h3= @question.title
     p
       = @question.body
+    -unless @question.attachments.blank?
+      ul.attached-files
+        -@question.attachments.each do |a|
+          = render 'attachments/attached', a: a, subject: @question
+
     - if user_signed_in? && @question.user_id == current_user.id
       p= link_to 'Редактировать вопрос', edit_question_path(@question)
       p= link_to 'Удалить вопрос', @question, method: :delete
@@ -13,9 +18,16 @@
     = render @question.answers
 
   - if user_signed_in?
-    = form_for [@question, @answer], remote: true, html: {class: 'form-horizontal new_answer'} do |f|
-      .answer_errors
-      = f.label :body, 'Новый ответ'
-      = f.text_area :body, class: 'form-control'
-      br
-      = f.submit 'Save', class: 'btn btn-save'
+    .container
+      = simple_form_for [@question, @answer], remote: true, html: {class: 'form-horizontal new_answer'} do |f|
+        .answer_errors
+        = f.label :body, 'Новый ответ'
+        = f.input :body, input_html: {rows: 6}, label: false
+        = f.simple_fields_for :attachments do |a|
+          = render 'questions/attachment_fields', f: a
+          .row.add-file
+            = link_to_add_association 'Добавить еще файл', f, :attachments,
+                                      data: {association_insertion_node: '.nested-fields:last',
+                                             association_insertion_method: 'after'}
+        .form-group
+          = f.button :submit, 'Save', class: 'btn btn-default'

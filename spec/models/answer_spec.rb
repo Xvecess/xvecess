@@ -16,6 +16,10 @@ describe Answer do
 
   it { should belong_to :user }
 
+  it { should have_many(:attachments).dependent(:destroy) }
+
+  it {should accept_nested_attributes_for :attachments}
+
   describe 'set best answer' do
 
     before { question.has_best_answer? }
@@ -33,4 +37,10 @@ describe Answer do
     end
   end
 
+  describe 'answer not have attachment' do
+
+    it 'expecting true if no have attachment' do
+      expect(answer.not_have_attachment(answer: ['file'])).to eq true
+    end
+  end
 end

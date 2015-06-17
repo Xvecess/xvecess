@@ -14,10 +14,14 @@ describe Question do
 
   it { should have_many(:answers).dependent(:destroy) }
 
+  it { should have_many(:attachments).dependent(:destroy) }
+
   it { should validate_length_of(:title).
                   is_at_least(5).is_at_most(140) }
 
   it { should belong_to :user }
+
+  it { should accept_nested_attributes_for :attachments }
 
   describe 'question has best answer ?' do
 
@@ -30,4 +34,12 @@ describe Question do
       expect(question.has_best_answer?).to be false
     end
   end
+
+  describe 'question not have attachment' do
+
+    it 'expecting true if no have attachment' do
+      expect(question.not_have_attachment(question: ['file'])).to eq true
+    end
+  end
 end
+

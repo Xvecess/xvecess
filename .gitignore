@@ -17,3 +17,6 @@ config/database.yml
 .idea/misc.xml
 .idea/runConfigurations
 .idea
+/public/uploads
+# Ignore application configuration
+/config/application.yml

@@ -29,6 +29,10 @@ describe QuestionsController do
       expect(assigns(:question)).to be_a_new (Question)
     end
 
+    it 'build new attachment for question' do
+      expect(assigns(:question).attachments.first).to be_a_new(Attachment)
+    end
+
     it 'render new view' do
       expect(response).to render_template :new
     end
@@ -40,6 +44,10 @@ describe QuestionsController do
 
     it 'it sets variable @question  requested question' do
       expect(assigns(:question)).to eq question
+    end
+
+    it 'build new attachment for answer' do
+      expect(assigns(:answer).attachments.first).to be_a_new(Attachment)
     end
 
     it 'render show view' do
@@ -58,6 +66,10 @@ describe QuestionsController do
 
     it 'it sets variable @question  requested question' do
       expect(assigns(:question)).to eq question
+    end
+
+    it 'build new attachment for answer' do
+      expect(assigns(:question).attachments.first).to be_a_new(Attachment)
     end
 
     it 'render show view' do
