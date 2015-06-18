@@ -18,6 +18,11 @@ ready = ->
     answer = $.parseJSON(xhr.responseText)
     $('#' + answer.id + ' .vote-count').html(answer.vote_size)
 
+
+  $('.answer-vote-down').on('click').bind 'ajax:success', (e, data, status, xhr) ->
+    answer = $.parseJSON(xhr.responseText)
+    $('#' + answer.id + ' .vote-count').html(answer.vote_size)
+
   $('.set-best-answer').parent().addClass('set_best_answer')
 
 $(document).ready(ready)

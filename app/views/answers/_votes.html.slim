@@ -4,5 +4,5 @@
 .vote-count id = answer.id
   = answer.vote_size
 .vote-down
-  = link_to '-', answer_vote_down_answer_path(answer), class: 'answer-vote-down',
+  = link_to '-', answer_vote_down_answer_path(answer), remote: true, class: 'answer-vote-down',
             data: {answer_id: answer.id}, method: :put

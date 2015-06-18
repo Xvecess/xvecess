@@ -32,8 +32,11 @@ class AnswersController < ApplicationController
   end
 
   def answer_vote_down
-    unless @answer.user_id == current_user.id
-      format.json { @answer.vote_down }
+    respond_to do |format|
+      unless @answer.user_id == current_user.id
+        @answer.vote_down
+        format.json { render json: @answer }
+      end
     end
   end
 
