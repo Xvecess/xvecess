@@ -17,17 +17,17 @@ class Answer < ActiveRecord::Base
     update_attributes(best: true)
   end
 
-  def not_have_attachment (attributes)
-    attributes['file'].blank?
-  end
-
   def vote_up
-    update_attributes(vote_size: (vote_size + 1))
-    user.update_attributes(vote_size: (user.vote_size + 1))
+    increment!(:vote_size)
+    user.increment!(:vote_size)
   end
 
   def vote_down
-    update_attributes(vote_size: (vote_size - 1))
-    user.update_attributes(vote_size: (user.vote_size - 1))
+    decrement!(:vote_size)
+    user.decrement!(:vote_size)
+  end
+
+  def not_have_attachment (attributes)
+    attributes['file'].blank?
   end
 end

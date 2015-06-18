@@ -1,6 +1,8 @@
 // Place all the styles related to the Answers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$color-vote: #444444;
+
 .new_answer {
   margin-top: 40px;
   margin-bottom: 20px;
@@ -34,11 +36,9 @@
 .vote-up {
   height: 5px;
   font-size: 30pt;
-  width: 20px;
-  color: #444444;
   text-align: center;
-  margin-bottom: 40px;
-  color: #444444;
+  margin-bottom: 30px;
+  color: $color-vote;
   text-decoration: none;
   a:hover, a:visited, a:link, a:active {
     text-decoration: none;
@@ -46,11 +46,10 @@
 }
 
 .vote-down {
-  height: 10px;
+  height: 5px;
   font-size: 30pt;
-  width: 20px;
   text-align: center;
-  color: #444444;
+  color: $color-vote;
   text-decoration: none;
   a:hover, a:visited, a:link, a:active {
     text-decoration: none;
@@ -59,11 +58,13 @@
 
 .answer-row {
   padding-bottom: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
 
 .vote-count {
+  height: 10px;
+  padding-top: 5px;
   font-size: 15pt;
-  width: 30px;
   text-align: center;
 }
+
