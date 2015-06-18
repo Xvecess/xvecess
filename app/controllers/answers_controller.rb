@@ -1,7 +1,7 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!
   before_action :load_question, only: [:create]
-  before_action :load_answer, only: [:update, :destroy, :best_answer]
+  before_action :load_answer, only: [:update, :destroy, :best_answer, :answer_vote_up, :answer_vote_down]
   before_action :answer_user_compare, only: [:update, :destroy]
 
   def create
@@ -20,6 +20,21 @@ class AnswersController < ApplicationController
   def best_answer
     @answer.set_best_answer
     redirect_to @answer.question
+  end
+
+  def answer_vote_up
+    respond_to do |format|
+      unless @answer.user_id == current_user.id
+        @answer.vote_up
+        format.json { render json: @answer }
+      end
+    end
+  end
+
+  def answer_vote_down
+    unless @answer.user_id == current_user.id
+      format.json { @answer.vote_down }
+    end
   end
 
   private

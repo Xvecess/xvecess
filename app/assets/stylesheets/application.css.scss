@@ -13,28 +13,31 @@
  *= require_tree .
  *= require_self
  */
+
+
+
 .errors ul {
-    list-style: none;
-    color: red;
-    padding: 5px;
-    font-size: 15px;
+  list-style: none;
+  color: red;
+  padding: 5px;
+  font-size: 15px;
 }
 
 ul.navigation-links {
-    list-style: none;
-    display: flex;
+  list-style: none;
+  display: flex;
 }
 
 ul.navigation-links li {
-    flex-grow: 1;
+  flex-grow: 1;
 }
 
 .notices {
-    color: #ff0000;
-    font-size: 22px;
-    margin-top: 20px;
+  color: #ff0000;
+  font-size: 22px;
+  margin-top: 20px;
 }
 
 .new_user {
-    max-width: 250px;
+  max-width: 250px;
 }

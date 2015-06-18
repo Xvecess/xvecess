@@ -18,7 +18,7 @@ The users were asked the question can
       sign_in(user)
       visit question_path(question)
 
-      within "##{answer.id}" do
+      within "##{answer.id} .answer" do
         click_on 'Это лучший ответ'
       end
 
@@ -38,19 +38,19 @@ The users were asked the question can
       sign_in(user)
       visit question_path(question)
 
-      within "##{answer1.id}" do
+      within "##{answer1.id} .answer" do
         expect(page).to have_content "Пользователь #{question.user.email} отметил этот ответ, как лучший"
       end
-      within "##{answer2.id}" do
+      within "##{answer2.id} .answer" do
         expect(page).to_not have_content "Пользователь #{question.user.email} отметил этот ответ, как лучший"
       end
 
-      within ("##{answer2.id}") { click_on 'Это лучший ответ' }
+      within ("##{answer2.id} .answer") { click_on 'Это лучший ответ' }
 
-      within "##{answer1.id}" do
+      within "##{answer1.id} .answer" do
         expect(page).to_not have_content "Пользователь #{question.user.email} отметил этот ответ, как лучший"
       end
-      within "##{answer2.id}" do
+      within "##{answer2.id} .answer" do
         expect(page).to have_content "Пользователь #{question.user.email} отметил этот ответ, как лучший"
       end
     end

@@ -13,8 +13,8 @@
       p= link_to 'Удалить вопрос', @question, method: :delete
     p Вопрос задан #{ @question.created_at.to_formatted_s(:long)} пользователем #{ @question.user.email}
 
-  div.answers
-    H3 Ответы
+  .answers
+    H4 #{ @question.answers.count } Ответов
     = render @question.answers
 
   - if user_signed_in?

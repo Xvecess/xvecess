@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   resources :questions do
     resources :answers, shallow: true do
         post 'best_answer', on: :member
+        put 'answer_vote_up', on: :member
+        put 'answer_vote_down', on: :member
     end
   end
 

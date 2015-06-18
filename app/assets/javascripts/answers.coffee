@@ -7,11 +7,16 @@ ready = ->
     answer_id = $(this).data('answerId')
     $("#" + answer_id).hide();
 
+
   $('.edit_answer-link').click (e) ->
     e.preventDefault();
     $(this).hide();
     answer_id = $(this).data('answerId')
     $('form#edit-answer-' + answer_id).show();
+
+  $('.answer-vote-up').on('click').bind 'ajax:success', (e, data, status, xhr) ->
+    answer = $.parseJSON(xhr.responseText)
+    $('#' + answer.id + ' .vote-count').html(answer.vote_size)
 
   $('.set-best-answer').parent().addClass('set_best_answer')
 
