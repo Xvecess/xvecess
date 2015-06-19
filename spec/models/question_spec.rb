@@ -23,6 +23,8 @@ describe Question do
 
   it { should accept_nested_attributes_for :attachments }
 
+  it { should have_many(:votes).dependent(:destroy) }
+
   describe 'question has best answer ?' do
 
     it 'return true if question has best answer' do

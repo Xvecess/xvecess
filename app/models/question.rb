@@ -1,4 +1,5 @@
 class Question < ActiveRecord::Base
+  include Votable
 
   default_scope { order ('created_at DESC') }
 

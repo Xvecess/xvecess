@@ -1,4 +1,5 @@
 class Answer < ActiveRecord::Base
+  include Votable
 
   default_scope { order ('best DESC') }
 
@@ -15,16 +16,6 @@ class Answer < ActiveRecord::Base
       answer.update_attributes(best: false)
     end
     update_attributes(best: true)
-  end
-
-  def vote_up
-    increment!(:vote_size)
-    user.increment!(:vote_size)
-  end
-
-  def vote_down
-    decrement!(:vote_size)
-    user.decrement!(:vote_size)
   end
 
   def not_have_attachment (attributes)
