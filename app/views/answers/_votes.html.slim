@@ -1,8 +1,18 @@
 .vote-up
-  = link_to image_tag(asset_path('up.png')), vote_up_answer_path(answer), remote: true, class: 'answer-vote-up',
-            data: {answer_id: answer.id}, method: :patch
+  = link_to image_tag(asset_path('up.png')), vote_up_answer_path(answer), remote: true,
+            class: 'answer-vote-up',
+            data: {answer_id: answer.id}, method: :put
+
 .vote-count id = answer.id
   = answer.vote_size
+
 .vote-down
-  = link_to image_tag(asset_path('down.png')), vote_down_answer_path(answer), remote: true, class: 'answer-vote-down',
-            data: {answer_id: answer.id}, method: :patch
+  = link_to image_tag(asset_path('down.png')), vote_down_answer_path(answer), remote: true,
+            class: 'answer-vote-down',
+            data: {answer_id: answer.id}, method: :put
+
+-if user_signed_in? && answer.user_id != current_user.id
+  .vote-reload id = answer.id
+    = link_to 'переголосовать', destroy_vote_answer_path(answer), remote: true,
+              class: 'answer-vote-reload',
+              data: {answer_id: answer.id}, method: :delete
