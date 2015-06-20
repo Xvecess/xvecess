@@ -22,24 +22,6 @@ class AnswersController < ApplicationController
     redirect_to @answer.question
   end
 
-  def answer_vote_up
-    respond_to do |format|
-      unless @answer.user_id == current_user.id
-        @answer.vote_up
-        format.json { render json: @answer }
-      end
-    end
-  end
-
-  def answer_vote_down
-    respond_to do |format|
-      unless @answer.user_id == current_user.id
-        @answer.vote_down
-        format.json { render json: @answer }
-      end
-    end
-  end
-
   private
 
   def load_question
