@@ -7,26 +7,24 @@ module Votable
 
   def vote_up(voter_user)
     unless voter_voted?(voter_user)
-      votes.create(user_id: voter_user.id)
+      vote = votes.create(user_id: voter_user.id)
       increment!(:vote_size)
       user.increment!(:vote_size)
+      vote.update(vote_value: vote_size)
     end
   end
 
   def vote_down(voter_user)
     unless voter_voted?(voter_user)
-      votes.create(user_id: voter_user.id)
+      vote = votes.create(user_id: voter_user.id)
       decrement!(:vote_size)
       user.decrement!(:vote_size)
+      vote.update(vote_value: vote_size)
     end
   end
 
-  def vote_delete
-    if vote_size > 0
-      decrement!(:vote_size)
-    elsif vote_size < 0
-      increment!(:vote_size)
-    end
+  def change_vote_size
+
   end
 
   def voter_voted?(voter_user)

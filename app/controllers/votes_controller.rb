@@ -9,7 +9,6 @@ class VotesController < ApplicationController
         format.json { render json: @parent }
       end
     end
-
   end
 
   def vote_down
@@ -23,11 +22,9 @@ class VotesController < ApplicationController
 
   def destroy_vote
     respond_to do |format|
-      @vote = Vote.find_by_votable_id(@parent)
-      if @vote.user_id == current_user.id
-        @vote.destroy
-        @parent.vote_delete
-      end
+      @vote = @parent.votes.find_by_user_id(current_user)
+      @parent.change_vote_size
+      @vote.destroy
       format.json { render json: @parent }
     end
   end
@@ -38,5 +35,4 @@ class VotesController < ApplicationController
     resource, id = request.path.split("/")[1, 2]
     @parent = resource.singularize.classify.constantize.find(id)
   end
-
 end

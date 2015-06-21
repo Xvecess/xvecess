@@ -5,8 +5,6 @@ To use the site
 quest can register
 } do
 
-  given!(:user) { create(:user) }
-
   scenario 'quest enters valid data' do
     sign_up
     fill_in 'Email', with: 'testuser@test.com'
