@@ -15,17 +15,17 @@ ready = ->
 
   $('.answer-vote-up').on('click').bind 'ajax:success', (e, data, status, xhr) ->
     answer = $.parseJSON(xhr.responseText)
-    $('#' + answer.id + ' .vote-count').html(answer.vote_size)
+    $('#' + answer.id + ' .vote-count').html(answer.vote_sum)
     $('#' + answer.id + ' .vote-reload a').show()
 
   $('.answer-vote-down').on('click').bind 'ajax:success', (e, data, status, xhr) ->
     answer = $.parseJSON(xhr.responseText)
-    $('#' + answer.id + ' .vote-count').html(answer.vote_size)
+    $('#' + answer.id + ' .vote-count').html(answer.vote_sum)
     $('#' + answer.id + ' .vote-reload a').show()
 
   $('.answer-vote-reload').on('click').bind 'ajax:success', (e, data, status, xhr) ->
     answer = $.parseJSON(xhr.responseText)
-    $('#' + answer.id + ' .vote-count').html(answer.vote_size)
+    $('#' + answer.id + ' .vote-count').html(answer.vote_sum)
     $('#' + answer.id + ' .vote-reload a').hide()
 
   $('.set-best-answer').parent().addClass('set_best_answer')

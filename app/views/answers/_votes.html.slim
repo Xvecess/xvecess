@@ -4,7 +4,7 @@
             data: {answer_id: answer.id}, method: :put
 
 .vote-count id = answer.id
-  = answer.vote_size
+  = answer.vote_sum
 
 .vote-down
   = link_to image_tag(asset_path('down.png')), vote_down_answer_path(answer), remote: true,

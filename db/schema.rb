@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150621090808) do
+ActiveRecord::Schema.define(version: 20150622095836) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,7 +23,7 @@ ActiveRecord::Schema.define(version: 20150621090808) do
     t.integer  "question_id"
     t.integer  "user_id"
     t.boolean  "best",        default: false
-    t.integer  "vote_size",   default: 0
+    t.integer  "vote_sum",    default: 0
   end
 
   add_index "answers", ["question_id"], name: "index_answers_on_question_id", using: :btree
@@ -45,7 +45,7 @@ ActiveRecord::Schema.define(version: 20150621090808) do
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
     t.integer  "user_id"
-    t.integer  "vote_size",  default: 0
+    t.integer  "vote_sum",   default: 0
   end
 
   add_index "questions", ["user_id"], name: "index_questions_on_user_id", using: :btree
@@ -63,7 +63,6 @@ ActiveRecord::Schema.define(version: 20150621090808) do
     t.inet     "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
-    t.integer  "vote_size",              default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

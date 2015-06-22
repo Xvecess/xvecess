@@ -1,6 +1,9 @@
-class VotesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :find_parent
+module Votes
+  extend ActiveSupport::Concern
+
+  included do
+    before_action :find_parent, only: [:vote_up, :vote_down, :destroy_vote]
+  end
 
   def vote_up
     respond_to do |format|
@@ -22,9 +25,7 @@ class VotesController < ApplicationController
 
   def destroy_vote
     respond_to do |format|
-      @vote = @parent.votes.find_by_user_id(current_user)
-      @parent.change_vote_size
-      @vote.destroy
+      @parent.change_vote_size(current_user)
       format.json { render json: @parent }
     end
   end
