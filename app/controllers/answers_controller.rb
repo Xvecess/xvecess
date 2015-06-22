@@ -2,7 +2,7 @@ class AnswersController < ApplicationController
   include Votes
   before_action :authenticate_user!
   before_action :load_question, only: [:create]
-  before_action :load_answer, only: [:update, :destroy, :best_answer, :answer_vote_up, :answer_vote_down]
+  before_action :load_answer, only: [:update, :destroy, :best_answer]
   before_action :answer_user_compare, only: [:update, :destroy]
 
   def create

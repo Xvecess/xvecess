@@ -1,5 +1,7 @@
-.question_answers
-  .question_show
+.row.question_answers
+  .question-votes.col-md-2
+    = render 'questions/vote', question: @question
+  .question_show.col-md-10
     h3= @question.title
     p
       = @question.body
