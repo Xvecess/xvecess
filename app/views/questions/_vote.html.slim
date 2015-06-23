@@ -3,7 +3,7 @@
             class: 'question-vote-up',
             data: {question_id: question.id}, method: :put
 
-.vote-question-count id = question.id
+.vote-question-count
   = question.vote_sum
 
 .vote-question-down
@@ -12,7 +12,7 @@
             data: {question_id: question.id}, method: :put
 
 -if user_signed_in? && question.user_id != current_user.id
-  .vote-question-reload id = question.id
+  .vote-question-reload
     = link_to 'переголосовать', destroy_vote_question_path(question), remote: true,
               class: 'question-vote-reload',
               data: {question_id: question.id}, method: :delete

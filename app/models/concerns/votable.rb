@@ -5,31 +5,30 @@ module Votable
     has_many :votes, as: :votable, dependent: :destroy
   end
 
-  def vote_up(voter_user)
-    unless voter_voted?(voter_user)
-      votes.create(user_id: voter_user.id)
-      update(vote_sum: self.vote_sum + 1)
+  def vote_up(voter)
+    unless voted_by? voter
+      votes.create(user: voter, vote_value: 1)
     end
   end
 
-  def vote_down(voter_user)
-    unless voter_voted?(voter_user)
-      votes.create(user_id: voter_user.id)
-      update(vote_sum: self.vote_sum - 1)
+  def vote_down(voter)
+    unless voted_by? voter
+      votes.create(user: voter, vote_value: -1)
     end
   end
 
-  def  change_vote_size(voter_user)
-    vote = self.votes.find_by_user_id(voter_user)
-    if vote_sum < 0
-    update(vote_sum: self.vote_sum - 1)
-    elsif vote_sum < 0
-    update(vote_sum: self.vote_sum + 1)
-    end
+  def destroy_vote(voter)
+    vote = votes.find_by_user_id(voter)
     vote.destroy
   end
 
-  def voter_voted?(voter_user)
-    votes.find_by_user_id(voter_user) ? true : false
+  def update_votes
+    update(vote_sum: votes.sum(:vote_value))
+  end
+
+  protected
+
+  def voted_by?(voter)
+    votes.find_by_user_id(voter) ? true : false
   end
 end

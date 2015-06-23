@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622095836) do
+ActiveRecord::Schema.define(version: 20150623123354) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,12 +69,12 @@ ActiveRecord::Schema.define(version: 20150622095836) do
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "votes", force: :cascade do |t|
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "user_id"
     t.integer  "votable_id"
     t.string   "votable_type"
-    t.integer  "vote_value"
+    t.integer  "vote_value",   default: 0
   end
 
   add_index "votes", ["user_id"], name: "index_votes_on_user_id", using: :btree

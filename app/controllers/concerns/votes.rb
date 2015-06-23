@@ -9,6 +9,7 @@ module Votes
     respond_to do |format|
       unless @parent.user_id == current_user.id
         @parent.vote_up(current_user)
+        @parent.reload
         format.json { render json: @parent }
       end
     end
@@ -18,6 +19,7 @@ module Votes
     respond_to do |format|
       unless @parent.user_id == current_user.id
         @parent.vote_down(current_user)
+        @parent.reload
         format.json { render json: @parent }
       end
     end
@@ -25,7 +27,8 @@ module Votes
 
   def destroy_vote
     respond_to do |format|
-      @parent.change_vote_size(current_user)
+      @parent.destroy_vote(current_user)
+      @parent.reload
       format.json { render json: @parent }
     end
   end
