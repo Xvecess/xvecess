@@ -72,6 +72,6 @@ group :test do
 
   gem 'poltergeist'
 
-
+  gem 'json_spec'
 end
 
