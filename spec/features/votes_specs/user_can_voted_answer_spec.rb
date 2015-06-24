@@ -55,7 +55,7 @@ feature 'User can voted answer' do
 
     visit question_path(question2)
 
-    within '.answer-votes ' do
+    within '.answer-votes' do
       expect(page).to have_selector '.vote-count', text: '0'
       find('a.answer-vote-up').click
 

@@ -15,14 +15,4 @@ describe Vote do
   it { should validate_presence_of :votable_type }
 
   it { should validate_presence_of :vote_value }
-
-
-  describe 'after destroy vote' do
-    before do
-      vote.destroy
-    end
-    it 'change vote sum for votable' do
-      expect(question.reload.vote_sum).to eq 0
-    end
-  end
 end
