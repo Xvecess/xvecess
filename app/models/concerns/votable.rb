@@ -6,15 +6,11 @@ module Votable
   end
 
   def vote_up(voter)
-    unless voted_by? voter
-      votes.create(user: voter, vote_value: 1)
-    end
+      votes.create(user: voter, vote_value: 1) unless voter.voted? self
   end
 
   def vote_down(voter)
-    unless voted_by? voter
-      votes.create(user: voter, vote_value: -1)
-    end
+      votes.create(user: voter, vote_value: -1)unless voter.voted? self
   end
 
   def destroy_vote(voter)
@@ -24,11 +20,5 @@ module Votable
 
   def update_votes
     update(vote_sum: votes.sum(:vote_value))
-  end
-
-  protected
-
-  def voted_by?(voter)
-    votes.find_by_user_id(voter) ? true : false
   end
 end

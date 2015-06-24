@@ -6,4 +6,8 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
+
+  def voted?(votable)
+    votes.find_by_votable_id(votable) ? true : false
+  end
 end
