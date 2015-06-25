@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  def voted?(vocable)
-    votes.find_by_votable_id(vocable) ? true : false
+  def voted?(votable)
+    votes.where(votable: votable).first ? true : false
   end
 end
