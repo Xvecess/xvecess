@@ -1,0 +1,18 @@
+.vote-question-up
+  = link_to image_tag(asset_path('up.png')), vote_up_question_path(question), remote: true,
+            class: 'question-vote-up',
+            data: { type: :json, question_id: question.id}, method: :put
+
+.vote-question-count
+  = question.vote_sum
+
+.vote-question-down
+  = link_to image_tag(asset_path('down.png')), vote_down_question_path(question), remote: true,
+            class: 'question-vote-down',
+            data: {question_id: question.id, type: :json }, method: :put
+
+-if user_signed_in? && question.user_id != current_user.id
+  .vote-question-reload
+    = link_to 'переголосовать', destroy_vote_question_path(question), remote: true,
+              class: 'question-vote-reload',
+              data: {question_id: question.id, type: :json}, method: :delete

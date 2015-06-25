@@ -6,6 +6,7 @@ describe AnswersController do
   let(:question) { create(:question, user_id: user.id) }
   let!(:answer) { create(:answer, question_id: question.id, user_id: user.id, best: false) }
 
+
   describe 'POST #create' do
     sign_in_user
 
@@ -13,7 +14,7 @@ describe AnswersController do
 
       it 'the answer belong to question and saving in database' do
         expect { post :create, question_id: question.id,
-                      answer: attributes_for(:answer), format: :js}
+                      answer: attributes_for(:answer), format: :js }
             .to change(question.answers, :count).by(1)
       end
 
@@ -64,7 +65,7 @@ describe AnswersController do
 
       it 'not change answer, If user is not the owner answer' do
         patch :update,
-              id: answer,format: :js, answer: attributes_for(:answer)
+              id: answer, format: :js, answer: attributes_for(:answer)
         expect(answer.body).to eq 'MyAnswer'
       end
     end
@@ -85,7 +86,7 @@ describe AnswersController do
 
     context 'user not owner answer' do
 
-      before { answer.user = user}
+      before { answer.user = user }
 
       it 'not destroy answer, If user is not the owner answer' do
         expect { delete :destroy,
@@ -93,7 +94,7 @@ describe AnswersController do
       end
 
       it 'it redirect to if answer not  destroy' do
-        delete :destroy, id: answer , format: :js
+        delete :destroy, id: answer, format: :js
         expect(response).to redirect_to root_url
       end
     end
@@ -126,6 +127,63 @@ describe AnswersController do
         answer.reload
         expect(answer.best).to be false
       end
+    end
+  end
+
+  describe 'PUT #vote_up' do
+    sign_in_user
+
+    it 'should answer vote sum increment' do
+      put :vote_up, id: answer, format: :json
+      answer.reload
+
+      expect(answer.vote_sum).to eq 1
+    end
+
+    it 'should request question in json' do
+      put :vote_up, id: answer, format: :json
+
+      answer.reload
+      expect(response.body).to include answer.to_json
+    end
+  end
+
+  describe 'PUT #vote_down' do
+    sign_in_user
+
+    it 'should answer vote sum increment' do
+      put :vote_down, id: answer, format: :json
+      answer.reload
+
+      expect(answer.vote_sum).to eq -1
+    end
+
+    it 'should request question in json' do
+      put :vote_down, id: answer, format: :json
+
+      answer.reload
+      expect(response.body).to include answer.to_json
+    end
+  end
+
+  describe 'DELETE #vote_down' do
+    sign_in_user
+
+    before do
+      answer.votes.create(user: @user, votable: answer, vote_value: 1)
+    end
+
+    it 'should answer vote sum increment' do
+      delete :destroy_vote, id: answer, format: :json
+      answer.reload
+
+      expect(answer.vote_sum).to eq 0
+    end
+
+    it 'should request question in json' do
+      delete :destroy_vote, id: answer, format: :json
+      answer.reload
+      expect(response.body).to include answer.to_json
     end
   end
 end

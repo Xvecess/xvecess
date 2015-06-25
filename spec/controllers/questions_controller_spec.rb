@@ -114,7 +114,7 @@ describe QuestionsController do
   describe 'PATCH #update' do
     sign_in_user
 
-    before { question.update!(user: @user)}
+    before { question.update!(user: @user) }
 
     context 'with valid attributes' do
 
@@ -201,6 +201,63 @@ describe QuestionsController do
         delete :destroy, id: question
         expect(response).to redirect_to root_url
       end
+    end
+  end
+
+  describe 'PUT #vote_down' do
+    sign_in_user
+
+    it 'should answer vote sum increment' do
+      put :vote_down, id: question, format: :json
+      question.reload
+
+      expect(question.vote_sum).to eq -1
+    end
+
+    it 'should request question in json' do
+      put :vote_down, id: question, format: :json
+
+      question.reload
+      expect(response.body).to include question.to_json
+    end
+  end
+
+  describe 'PUT #vote_up' do
+    sign_in_user
+
+    it 'should answer vote sum increment' do
+      put :vote_up, id: question, format: :json
+      question.reload
+
+      expect(question.vote_sum).to eq 1
+    end
+
+    it 'should request question in json' do
+      put :vote_up, id: question, format: :json
+
+      question.reload
+      expect(response.body).to include question.to_json
+    end
+  end
+
+  describe 'DELETE #destroy_vote' do
+    sign_in_user
+
+    before do
+      question.votes.create(user: @user, votable: question, vote_value: 1)
+    end
+
+    it 'should answer vote sum increment' do
+      delete :destroy_vote, id: question, format: :json
+      question.reload
+
+      expect(question.vote_sum).to eq 0
+    end
+
+    it 'should request question in json' do
+      delete :destroy_vote, id: question, format: :json
+      question.reload
+      expect(response.body).to include question.to_json
     end
   end
 end

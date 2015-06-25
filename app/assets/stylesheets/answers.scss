@@ -1,6 +1,9 @@
 // Place all the styles related to the Answers controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+$color-vote: #444444;
+
 .new_answer {
   margin-top: 40px;
   margin-bottom: 20px;
@@ -26,14 +29,58 @@
   color: red;
 }
 
-.set_best_answer {
-  background-color: rosybrown !important;
-  border: 2px red solid;
-}
-
 .answer {
   margin-bottom: 10px;
   padding: 10px;
-  background-color: #BBBBBB;
-  border-radius: 5px;
+}
+
+.vote-up {
+  height: 5px;
+  font-size: 30pt;
+  text-align: center;
+  margin-bottom: 30px;
+  color: $color-vote;
+  text-decoration: none;
+  a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
+  }
+  a img {
+    width: 25px;
+    height: 15px;
+  }
+}
+
+.vote-down {
+  height: 5px;
+  font-size: 30pt;
+  text-align: center;
+  color: $color-vote;
+  text-decoration: none;
+  a:hover, a:visited, a:link, a:active {
+    text-decoration: none;
+  }
+  a img {
+    width: 25px;
+    height: 15px;
+  }
+}
+
+.answer-row {
+  padding-bottom: 10px;
+  margin-bottom: 5px;
+}
+
+.vote-count {
+  height: 10px;
+  padding-top: 5px;
+  font-size: 15pt;
+  text-align: center;
+}
+
+.vote-reload {
+  margin-top: 40px;
+}
+
+.answer-body {
+  border-bottom: 1px #888888 solid;
 }
