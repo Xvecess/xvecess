@@ -1,6 +1,5 @@
 class AnswersController < ApplicationController
   include Voted
-  before_action :authenticate_user!
   before_action :load_question, only: [:create]
   before_action :load_answer, only: [:update, :destroy, :best_answer]
   before_action :answer_user_compare, only: [:update, :destroy]

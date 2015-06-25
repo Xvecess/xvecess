@@ -3,7 +3,6 @@ module Voted
 
   included do
     before_action :find_parent, only: [:vote_up, :vote_down, :destroy_vote]
-
   end
 
   def vote_up
@@ -28,12 +27,13 @@ module Voted
     render json: @parent
   end
 
+  private
 
-private
+  def parent_klass
+    controller_name.classify.constantize
+  end
 
-def find_parent
-  resource, id = request.path.split("/")[1, 2]
-  @parent = resource.singularize.classify.constantize.find(id)
-end
-
+  def find_parent
+    @parent = parent_klass.find(params[:id])
+  end
 end

@@ -1,6 +1,7 @@
 class QuestionsController < ApplicationController
   include Voted
-  before_action :authenticate_user!, except: [:index, :show]
+  include PublicIndex
+  include PublicShow
   before_action :load_question, only: [:show, :edit, :update, :destroy]
   before_action :question_user_compare, only: [:update, :destroy]
 
