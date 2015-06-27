@@ -16,7 +16,7 @@ feature 'Ad files to answer' do
     find('.nested-fields input').set("#{Rails.root}/spec/models/user_spec.rb")
     click_on 'Save'
 
-    within 'div.answers' do
+    within 'section.answers' do
       expect(page).to have_content 'user_spec.rb'
     end
   end
@@ -29,7 +29,7 @@ feature 'Ad files to answer' do
     find('.nested-fields + .nested-fields input').set("#{Rails.root}/spec/rails_helper.rb")
     click_on 'Save'
 
-    within 'div.answers' do
+    within 'section.answers' do
       expect(page).to have_content 'spec_helper.rb'
       expect(page).to have_content 'rails_helper.rb'
     end

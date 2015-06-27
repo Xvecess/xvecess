@@ -1,7 +1,7 @@
 .row.question_answers
-  .question-votes.col-md-2
+  section.question-votes.col-md-2
     = render 'questions/vote', question: @question
-  .question_show.col-md-10
+  section.question_show.col-md-10
     h3= @question.title
     p
       = @question.body
@@ -15,12 +15,17 @@
       p= link_to 'Удалить вопрос', @question, method: :delete
     p Вопрос задан #{ @question.created_at.to_formatted_s(:long)} пользователем #{ @question.user.email}
 
-  .answers
-    H4 #{ @question.answers.count } Ответов
-    = render @question.answers
 
-  - if user_signed_in?
-    .container
+
+
+
+section.answers.row
+  H4 #{ @question.answers.count } Ответов
+  = render @question.answers
+
+- if user_signed_in?
+  .row
+    .col-md-5
       = simple_form_for [@question, @answer], remote: true, html: {class: 'form-horizontal new_answer'} do |f|
         .answer_errors
         = f.label :body, 'Новый ответ'

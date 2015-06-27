@@ -2,7 +2,7 @@
   .row.answer-body id = answer.id
     .answer-votes.col-md-2
       = render 'answers/votes', answer: answer
-    .answer.col-md-8
+    .answer.col-md-10
       - if answer.best
         p.set-best-answer Пользователь #{answer.question.user.email} отметил этот ответ, как лучший
       p Ответ #{answer.created_at.to_formatted_s(:long)} пользователем #{answer.user.email}
@@ -17,7 +17,7 @@
         p = link_to 'Удалить ответ', answer, remote: true,
                     method: :delete, class: 'delete_answer',
                     data: {answer_id: answer.id}
-        .container
+        .row
           = simple_form_for answer, remote: true, html: {class: 'form-horizontal edit_answer',
                                                          id: "edit-answer-#{answer.id}"} do |f|
             = f.label :body, 'Редактирование ответа'

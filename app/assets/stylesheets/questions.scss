@@ -3,6 +3,24 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 $color-vote: #444444;
 
+section.questions-list {
+  width: 600px;
+}
+
+.question-title-in-list {
+  font-size: 20px;
+  padding: 5px;
+}
+
+.question_answers {
+  border-bottom: 1px solid #444444;
+  width: 700px;
+}
+
+.question_show {
+  margin-bottom: 40px;
+}
+
 .question {
   max-width: 400px;
 }
@@ -11,25 +29,12 @@ textarea {
   resize: none;
 }
 
-.questions-list {
-  font-size: 20px;
-  padding: 5px;
-  border-radius: 10px;
-}
-
 .question-title {
   margin-bottom: 30px;
 }
 
 .question-title:hover {
   text-decoration: none;
-}
-
-.question_show {
-  margin-bottom: 40px;
-  padding: 10px;
-  border-top: 1px solid #444444;
-  border-bottom: 1px solid #444444;
 }
 
 .nested-fields {
