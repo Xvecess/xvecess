@@ -6,6 +6,7 @@ class Answer < ActiveRecord::Base
   belongs_to :question
   belongs_to :user
   has_many :attachments, as: :attachable, dependent: :destroy
+  has_many :comments, as: :commentable, dependent: :destroy
   validates :body, :user_id, :question_id, presence: true
 
   accepts_nested_attributes_for :attachments, reject_if: :not_have_attachment

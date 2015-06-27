@@ -17,6 +17,8 @@ describe Question do
 
   it { should have_many(:attachments).dependent(:destroy) }
 
+  it { should have_many(:comments).dependent(:destroy) }
+
   it { should validate_length_of(:title).
                   is_at_least(5).is_at_most(140) }
 

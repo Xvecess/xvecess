@@ -14,10 +14,8 @@
       p= link_to 'Редактировать вопрос', edit_question_path(@question)
       p= link_to 'Удалить вопрос', @question, method: :delete
     p Вопрос задан #{ @question.created_at.to_formatted_s(:long)} пользователем #{ @question.user.email}
-
-
-
-
+    .add-comment
+      p= link_to 'Добавить комментарий'
 
 section.answers.row
   H4 #{ @question.answers.count } Ответов
