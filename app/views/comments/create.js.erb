@@ -1,0 +1,10 @@
+<% if @comment.errors.present? %>
+  <% @comment.errors.full_messages.each do |error| %>
+    $("div.comment_errors").html("<%= j error %>");
+  <% end %>
+<% else %>
+  <% publish_to "/comments/#{@comment.commentable_id}/comment" do %>
+    $('ul.question-comments-show').append("<%= j render @comment %>");
+    $('textarea#comment_body').val('');
+  <% end %>
+<% end %>

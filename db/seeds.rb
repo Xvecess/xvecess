@@ -7,6 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 User.delete_all
 Question.delete_all
+Comment.delete_all
 10.times do |n|
   User.create(email: "#{n+1}@#{n+1}.ru", password: '12345678', password_confirmation: '12345678')
   Question.create(title: "Вопрос #{n+1} пользователя", body: 'Текст вопроса', user_id: (n+1) )

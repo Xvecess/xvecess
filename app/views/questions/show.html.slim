@@ -1,7 +1,7 @@
 .row.question_answers
   section.question-votes.col-md-2
     = render 'questions/vote', question: @question
-  section.question_show.col-md-10
+  section.question_show.col-md-9
     h3= @question.title
     p
       = @question.body
@@ -14,8 +14,15 @@
       p= link_to 'Редактировать вопрос', edit_question_path(@question)
       p= link_to 'Удалить вопрос', @question, method: :delete
     p Вопрос задан #{ @question.created_at.to_formatted_s(:long)} пользователем #{ @question.user.email}
-    .add-comment
-      p= link_to 'Добавить комментарий'
+
+    p Комментарии
+    ul.question-comments-show
+      = render @question.comments
+    -if user_signed_in?
+      .comment-form-control
+        span= link_to 'Добавить комментарий ', '', class: 'link-add-comment', data: {comment_id: @question.id}
+        span= link_to 'Свернуть форму', '', class: 'close-add-comment', data: {comment_id: @question.id}
+    = render 'comments/form', comment: Comment.new, commentable: @question
 
 section.answers.row
   H4 #{ @question.answers.count } Ответов
@@ -36,3 +43,6 @@ section.answers.row
                                              association_insertion_method: 'after'}
         .form-group
           = f.button :submit, 'Save', class: 'btn btn-default'
+
+= subscribe_to "/questions/#{@question.id}/answers"
+= subscribe_to "/comments/#{@question.id}/comment"

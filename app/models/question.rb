@@ -1,7 +1,7 @@
 class Question < ActiveRecord::Base
   include Votable
 
-  default_scope { order ('created_at ASC') }
+  default_scope { order ('created_at DESC') }
 
   has_many :answers, dependent: :destroy
   has_many :attachments, as: :attachable, dependent: :destroy

@@ -1,3 +1,28 @@
 // Place all the styles related to the Comments controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+form.comment {
+  display: none;
+}
+
+.comment-body {
+  height: 40px;
+  padding: 5px 0;
+  border-bottom: 1px solid silver;
+}
+
+.question-comments-show {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.answer-comments-show {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.comment-form-control span {
+  display: inline-block;
+  padding: 0 10px;
+}
