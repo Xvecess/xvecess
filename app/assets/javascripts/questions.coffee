@@ -17,9 +17,6 @@ ready = ->
     $('.vote-question-count').html(question.vote_sum)
     $('.vote-question-reload a').hide()
 
-  PrivatePub.subscribe '/questions/all', (data, chanel) ->
-    console.log(data)
-
 $(document).ready(ready)
 $(document).on('page:load', ready)
 $(document).on('page:update', ready)

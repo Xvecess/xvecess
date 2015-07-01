@@ -18,11 +18,9 @@
     p Комментарии
     ul.question-comments-show
       = render @question.comments
-    -if user_signed_in?
-      .comment-form-control
-        span= link_to 'Добавить комментарий ', '', class: 'link-add-comment', data: {comment_id: @question.id}
-        span= link_to 'Свернуть форму', '', class: 'close-add-comment', data: {comment_id: @question.id}
-    = render 'comments/form', comment: Comment.new, commentable: @question
+    .comment-form
+      -if user_signed_in?
+        = render 'comments/form', comment: Comment.new, commentable: @question
 
 section.answers.row
   H4 #{ @question.answers.count } Ответов
@@ -45,4 +43,4 @@ section.answers.row
           = f.button :submit, 'Save', class: 'btn btn-default'
 
 = subscribe_to "/questions/#{@question.id}/answers"
-= subscribe_to "/comments/#{@question.id}/comment"
+= subscribe_to "/comments"

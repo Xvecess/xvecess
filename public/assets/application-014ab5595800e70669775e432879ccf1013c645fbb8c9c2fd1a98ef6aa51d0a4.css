@@ -1,10 +1,15 @@
 /* line 7, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+.answers {
+  margin: 30px 0;
+}
+
+/* line 11, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .new_answer {
   margin-top: 40px;
   margin-bottom: 20px;
 }
 
-/* line 12, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 16, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .answer_errors {
   list-style: none;
   color: red;
@@ -12,29 +17,29 @@
   font-size: 15px;
 }
 
-/* line 19, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 23, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .edit_answer {
   display: none;
 }
 
-/* line 23, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 27, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .form-horizontal {
-  max-width: 600px;
+  width: 600px;
 }
 
-/* line 27, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 31, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .set-best-answer {
   font-style: italic;
   color: red;
 }
 
-/* line 32, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 36, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .answer {
   margin-bottom: 10px;
   padding: 10px;
 }
 
-/* line 37, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 41, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .vote-up {
   height: 5px;
   font-size: 30pt;
@@ -43,17 +48,17 @@
   color: #444444;
   text-decoration: none;
 }
-/* line 44, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 48, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .vote-up a:hover, .vote-up a:visited, .vote-up a:link, .vote-up a:active {
   text-decoration: none;
 }
-/* line 47, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 51, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .vote-up a img {
   width: 25px;
   height: 15px;
 }
 
-/* line 53, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 57, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .vote-down {
   height: 5px;
   font-size: 30pt;
@@ -61,23 +66,23 @@
   color: #444444;
   text-decoration: none;
 }
-/* line 59, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 63, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .vote-down a:hover, .vote-down a:visited, .vote-down a:link, .vote-down a:active {
   text-decoration: none;
 }
-/* line 62, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 66, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .vote-down a img {
   width: 25px;
   height: 15px;
 }
 
-/* line 68, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 72, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .answer-row {
   padding-bottom: 10px;
   margin-bottom: 5px;
 }
 
-/* line 73, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 77, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .vote-count {
   height: 10px;
   padding-top: 5px;
@@ -85,8 +90,15 @@
   text-align: center;
 }
 
-/* line 79, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+/* line 84, /home/user/xvecess/app/assets/stylesheets/answers.scss */
+.vote-reload {
+  margin-top: 40px;
+}
+
+/* line 88, /home/user/xvecess/app/assets/stylesheets/answers.scss */
 .answer-body {
+  width: 700px;
+  margin-top: 20px;
   border-bottom: 1px #888888 solid;
 }
 /*!
@@ -6662,76 +6674,168 @@ button.close {
   }
 }
 /*# sourceMappingURL=bootstrap.css.map */
-/* line 4, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+/* line 5, /home/user/xvecess/app/assets/stylesheets/comments.scss */
+form.comment {
+  max-width: 350px;
+}
+
+/* line 9, /home/user/xvecess/app/assets/stylesheets/comments.scss */
+.comment-body {
+  padding: 5px 0;
+  border-bottom: 1px solid silver;
+  max-width: 300px;
+}
+
+/* line 15, /home/user/xvecess/app/assets/stylesheets/comments.scss */
+.question-comments-show {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+/* line 20, /home/user/xvecess/app/assets/stylesheets/comments.scss */
+.answer-comments-show {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+/* line 25, /home/user/xvecess/app/assets/stylesheets/comments.scss */
+.comment-form-control span {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+/* line 30, /home/user/xvecess/app/assets/stylesheets/comments.scss */
+li.comment-body span {
+  display: inline-block;
+  padding: 0 20px;
+}
+/* line 6, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+section.questions-list {
+  width: 600px;
+}
+
+/* line 10, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+.question-title-in-list {
+  font-size: 20px;
+  padding: 5px;
+}
+
+/* line 15, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+.question_answers {
+  border-bottom: 1px solid #444444;
+  width: 700px;
+}
+
+/* line 20, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+.question_show {
+  margin-bottom: 40px;
+}
+
+/* line 24, /home/user/xvecess/app/assets/stylesheets/questions.scss */
 .question {
   max-width: 400px;
 }
 
-/* line 8, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+/* line 28, /home/user/xvecess/app/assets/stylesheets/questions.scss */
 textarea {
   resize: none;
 }
 
-/* line 12, /home/user/xvecess/app/assets/stylesheets/questions.scss */
-.questions-list {
-  font-size: 20px;
-  padding: 5px;
-  border-radius: 10px;
-}
-
-/* line 18, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+/* line 32, /home/user/xvecess/app/assets/stylesheets/questions.scss */
 .question-title {
   margin-bottom: 30px;
 }
 
-/* line 22, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+/* line 36, /home/user/xvecess/app/assets/stylesheets/questions.scss */
 .question-title:hover {
   text-decoration: none;
 }
 
-/* line 26, /home/user/xvecess/app/assets/stylesheets/questions.scss */
-.question_show {
-  margin-bottom: 40px;
-  padding: 10px;
-  border-top: 1px solid #444444;
-  border-bottom: 1px solid #444444;
-}
-
-/* line 33, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+/* line 40, /home/user/xvecess/app/assets/stylesheets/questions.scss */
 .nested-fields {
   margin-top: 20px;
 }
 
-/* line 37, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+/* line 44, /home/user/xvecess/app/assets/stylesheets/questions.scss */
 .add-file {
   margin-bottom: 20px;
 }
 
-/* line 41, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+/* line 48, /home/user/xvecess/app/assets/stylesheets/questions.scss */
 .file-name {
   color: red;
   margin-bottom: 10px;
 }
 
-/* line 46, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+/* line 53, /home/user/xvecess/app/assets/stylesheets/questions.scss */
 ul.attached-files {
   list-style: none;
 }
 
-/* line 50, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+/* line 57, /home/user/xvecess/app/assets/stylesheets/questions.scss */
 .row.attached-file {
   margin: 10px 0;
 }
 
-/* line 54, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+/* line 61, /home/user/xvecess/app/assets/stylesheets/questions.scss */
 .row.attached-file a {
   display: inline-block;
   padding-right: 10px;
 }
 
-/* line 59, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+/* line 66, /home/user/xvecess/app/assets/stylesheets/questions.scss */
 .add_file {
   display: none;
+}
+
+/* line 70, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+.vote-question-up {
+  height: 5px;
+  font-size: 30pt;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #444444;
+  text-decoration: none;
+}
+/* line 77, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+.vote-question-up a:hover, .vote-question-up a:visited, .vote-question-up a:link, .vote-question-up a:active {
+  text-decoration: none;
+}
+/* line 80, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+.vote-question-up a img {
+  width: 25px;
+  height: 15px;
+}
+
+/* line 86, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+.vote-question-down {
+  height: 5px;
+  font-size: 30pt;
+  text-align: center;
+  color: #444444;
+  text-decoration: none;
+}
+/* line 92, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+.vote-question-down a:hover, .vote-question-down a:visited, .vote-question-down a:link, .vote-question-down a:active {
+  text-decoration: none;
+}
+/* line 95, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+.vote-question-down a img {
+  width: 25px;
+  height: 15px;
+}
+
+/* line 101, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+.vote-question-count {
+  height: 10px;
+  padding-top: 5px;
+  font-size: 15pt;
+  text-align: center;
+}
+
+/* line 108, /home/user/xvecess/app/assets/stylesheets/questions.scss */
+.vote-question-reload {
+  margin-top: 40px;
 }
 /*
  * This is a manifest file that'll be compiled into application.css, which will include all the files
@@ -6742,7 +6846,7 @@ ul.attached-files {
  *
  * You're free to add application-wide styles to this file and they'll appear at the bottom of the
  * compiled file so the styles you add here take precedence over styles defined in any styles
- * defined in the other CSS/SCSS files in this directory. It is generally better to reate a new
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
 

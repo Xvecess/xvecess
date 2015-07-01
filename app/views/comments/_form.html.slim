@@ -1,7 +1,8 @@
 .add-comment
   = simple_form_for [commentable, comment],
-                    html: {class: 'comment', id: nil}, remote: true do |f|
+                    html: {class: 'comment', id: commentable.id, data: {commetable_id: commentable.id}},
+                    remote: true do |f|
     .comment_errors
-    =f.input :body, input_html: {rows: 3}, label: false
+    =f.input :body, input_html: {rows: 2, columns: 4}, label: false
     br
     =f.button :submit, 'Добавить комментарий'

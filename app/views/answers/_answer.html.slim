@@ -30,8 +30,9 @@
         - if answer.question.user_id == current_user.id && !answer.best
           =link_to 'Это лучший ответ', best_answer_answer_path(answer), method: :post
 
-      /p Комментарии
-      /.answer-comments-show
-      /  = render answer.comments
-      //p= link_to 'Добавить комментарий', '', class: 'link-add-comment', data: {answer_id: answer.id}
-      /= render 'comments/form', comment: Comment.new, commentable: answer
+      p Комментарии
+      ul.answer-comments-show id = answer.id
+        = render answer.comments
+      .comment-form
+        -if user_signed_in?
+          = render 'comments/form', comment: Comment.new, commentable: answer

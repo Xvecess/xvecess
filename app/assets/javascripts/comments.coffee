@@ -1,25 +1,27 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
 ready = ->
-  $('.link-add-comment').click (e) ->
-    e.preventDefault();
-    $('form.comment').slideDown()
+  $('form.comment').submit ->
+    commentable_id = $(this).data('commetableId')
+    PrivatePub.subscribe '/comments', (data, channel) ->
+      comment = $.parseJSON(data['comment'])
+      commentableid = comment.commentable_id
+      comment_id = comment.id
+      type = comment.commentable_type
 
-  $('.close-add-comment').click (e) ->
-    e.preventDefault();
-    $('form.comment').slideUp()
+      li = $('<li/>', {class: 'comment-body', id: 'comment-' + comment_id}).append(
+        $('<span>' + comment.body + '</span> <span> <a class="delete-comment" data-comment-id= ' +
+            comment_id + ' data-remote="true" rel="nofollow" data-method="delete" href="/comments/' +
+            comment_id + '">Удалить комментарий</a></span>'))
 
-#  $('form.comment').bind 'ajax:success', (e, data, status, xhr) ->
-#    commentable = $.parseJSON(xhr.responseText)
-#    id = commentable.commentable_id
-#    type = commentable.commentable_type
-#    li = '<li class="comment-body" id="comment-#{id}">' + commentable.body + '</li>'
-#    if  type == 'Question'
-#      $('.question-comments-show').append(li)
-#    else if type == 'Answer'
-#      $('.answer-comments-show#' + id).append(li)
-#    $('textarea.text').val('')
+      if  type == 'Question'
+        $('ul.question-comments-show').append(li)
+      else if type == 'Answer'
+        $('ul.answer-comments-show#' + commentableid).append(li)
+      $('textarea.text').val('')
+
+  $('.delete-comment').click (e) ->
+    e.preventDefault();
+    comment_id = $(this).data('commentId')
+    $('li#comment-' + comment_id + '.comment-body').hide()
 
 $(document).ready(ready)
 $(document).on('page:load', ready)

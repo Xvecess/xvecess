@@ -3,8 +3,8 @@
 #
 # Examples:
 #
-#   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
-#   Mayor.create(name: 'Emanuel', city: cities.first)
+#   cities = City.reate([{ name: 'Chicago' }, { name: 'Copenhagen' }])
+#   Mayor.reate(name: 'Emanuel', city: cities.first)
 User.delete_all
 Question.delete_all
 Comment.delete_all

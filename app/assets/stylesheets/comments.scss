@@ -3,13 +3,13 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 form.comment {
-  display: none;
+  max-width: 350px;
 }
 
 .comment-body {
-  height: 40px;
   padding: 5px 0;
   border-bottom: 1px solid silver;
+  max-width: 300px;
 }
 
 .question-comments-show {
@@ -25,4 +25,9 @@ form.comment {
 .comment-form-control span {
   display: inline-block;
   padding: 0 10px;
+}
+
+li.comment-body span {
+  display: inline-block;
+  padding: 0 20px;
 }
