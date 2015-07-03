@@ -9,7 +9,9 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy
+    if @comment.user == current_user
+      @comment.destroy
+    end
     render nothing: true
   end
 
