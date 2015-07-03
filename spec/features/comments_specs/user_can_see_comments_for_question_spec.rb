@@ -1,19 +1,15 @@
 require_relative '../acceptance_helper'
 
-feature 'User can comments questions' do
+feature 'User can delete  question comments' do
 
   given(:user) { create(:user) }
   given(:question) { create(:question, user: user) }
+  given!(:comments) { create_list(:comment, 2, commentable: question, user: user) }
 
   scenario 'user commented question', js: true do
     sign_in(user)
     visit question_path(question)
 
-    within 'form.comment' do
-      fill_in 'comment[body]', with: 'My comment'
-    end
-    click_on 'Добавить комментарий'
-
-    expect(page).to have_content 'My comment'
+    expect(page).to have_content 'MyComment', count: 2
   end
 end

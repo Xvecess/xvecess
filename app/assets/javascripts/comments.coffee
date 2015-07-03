@@ -1,6 +1,6 @@
 ready = ->
   pub = PrivatePub
-  pub.subscribe '/comments', (data, channel) ->
+  pub.subscribe "/comments", (data, channel) ->
     comment = $.parseJSON(data['comment'])
 
     $('form.comment').submit ->
@@ -13,21 +13,22 @@ ready = ->
           comment_id + ' data-remote="true" rel="nofollow" data-method="delete" href="/comments/' +
           comment_id + '">Удалить комментарий</a></span>'))
 
-    if  type == 'Question'
-      $('ul.question-comments-show').append(li)
-    else if type == 'Answer'
-      $('ul.answer-comments-show#' + commentable_id).append(li)
+    switch type
+      when 'Question' then $('ul.question-comments-show').append(li)
+      when 'Answer' then $("ul.answer-comments-show##{commentable_id}").append(li)
     $('textarea.text').val('')
 
-    pub.bind($('.delete-comment').click (e) ->
+    pub.subscribe ->
+    ($('.delete-comment').click (e) ->
       link = $(this)
       e.preventDefault();
       comment_id = link.data('commentId')
+      console.log(comment_id)
       $('li#comment-' + comment_id + '.comment-body').hide())
 
   $('.delete-comment').click (e) ->
     link = $(this)
-    e.preventDefault();
+    e.preventDefault()
     comment_id = link.data('commentId')
     $('li#comment-' + comment_id + '.comment-body').hide()
 

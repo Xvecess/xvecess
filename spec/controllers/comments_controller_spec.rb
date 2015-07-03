@@ -37,6 +37,8 @@ describe CommentsController do
 
     context 'comment for question' do
 
+      before { comment.update!(user: @user) }
+
       it 'should  destroy comment for question ' do
 
         expect { delete :destroy, question_id: question.id, id: comment.id,
@@ -45,6 +47,8 @@ describe CommentsController do
     end
 
     context 'comment for answer' do
+
+      before { comment2.update!(user: @user) }
 
       it 'should destroy comment for answer ' do
 

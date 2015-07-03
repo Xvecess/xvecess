@@ -1,5 +1,5 @@
 FactoryGirl.define do
   factory :comment do
-    body 'test'
+    body 'MyComment'
   end
 end
