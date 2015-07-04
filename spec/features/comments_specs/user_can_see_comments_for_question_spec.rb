@@ -1,6 +1,6 @@
 require_relative '../acceptance_helper'
 
-feature 'User can delete  question comments' do
+feature 'User can see list comments for question' do
 
   given(:user) { create(:user) }
   given(:question) { create(:question, user: user) }

@@ -15,17 +15,16 @@
       p= link_to 'Удалить вопрос', @question, method: :delete
     p Вопрос задан #{ @question.created_at.to_formatted_s(:long)} пользователем #{ @question.user.email}
 
-    .question-comments
+    section.question-comments
       p Комментарии
       ul.question-comments-list
-        = render @question.comments
+        = render @question.comments.all
       .comment-form
         -if user_signed_in?
           = render 'comments/form', comment: Comment.new, commentable: @question
 
-section.answers
-  H4 #{ @question.answers.count } Ответов
-  = render @question.answers
+  section.answers
+    = render @question.answers
 
 - if user_signed_in?
   .row

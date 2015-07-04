@@ -9,7 +9,7 @@ feature 'User can comments questions' do
     sign_in(user)
     visit question_path(question)
 
-    within 'form.comment' do
+    within 'form.new_comment' do
       fill_in 'comment[body]', with: 'My comment'
     end
     click_on 'Добавить комментарий'
