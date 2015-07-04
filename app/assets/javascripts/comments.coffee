@@ -16,9 +16,7 @@ ready = ->
     else if type == 'Answer'
       $('ul.answer-comments-list#' + commentable_id).append(li)
     $('textarea.text').val('')
-
-    pub.subscribe ->
-    (del_link())
+    del_link()
 
   del_link()
 
