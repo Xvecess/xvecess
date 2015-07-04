@@ -15,14 +15,15 @@
       p= link_to 'Удалить вопрос', @question, method: :delete
     p Вопрос задан #{ @question.created_at.to_formatted_s(:long)} пользователем #{ @question.user.email}
 
-    p Комментарии
-    ul.question-comments-show
-      = render @question.comments
-    .comment-form
-      -if user_signed_in?
-        = render 'comments/form', comment: Comment.new, commentable: @question
+    .question-comments
+      p Комментарии
+      ul.question-comments-list
+        = render @question.comments
+      .comment-form
+        -if user_signed_in?
+          = render 'comments/form', comment: Comment.new, commentable: @question
 
-section.answers.row
+section.answers
   H4 #{ @question.answers.count } Ответов
   = render @question.answers
 
@@ -43,3 +44,4 @@ section.answers.row
           = f.button :submit, 'Save', class: 'btn btn-default'
 
 = subscribe_to "/questions/#{@question.id}/answers"
+= subscribe_to "/comments"

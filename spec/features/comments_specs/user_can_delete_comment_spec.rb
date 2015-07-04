@@ -12,7 +12,7 @@ feature 'User can delete  question comments' do
 
     expect(page).to have_content 'MyComment'
 
-    within '.question-comments-show' do
+    within '.question-comments-list' do
       click_on 'Удалить комментарий'
     end
 
