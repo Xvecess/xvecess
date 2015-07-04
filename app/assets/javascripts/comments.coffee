@@ -18,18 +18,16 @@ ready = ->
     $('textarea.text').val('')
 
     pub.subscribe ->
-    ($('.delete-comment').click (e) ->
-      link = $(this)
-      e.preventDefault();
-      comment_id = link.data('commentId')
-      $('li#comment-' + comment_id + '.comment-body').hide())
+    (del_link())
 
+  del_link()
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
+
+del_link = ->
   $('.delete-comment').click (e) ->
     link = $(this)
     e.preventDefault()
     comment_id = link.data('commentId')
     $('li#comment-' + comment_id + '.comment-body').hide()
-
-$(document).ready(ready)
-$(document).on('page:load', ready)
-$(document).on('page:update', ready)
