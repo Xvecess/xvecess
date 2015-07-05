@@ -8,6 +8,8 @@ describe User do
 
   it { should have_many(:votes).dependent(:destroy) }
 
+  it { should have_many(:comments) }
+
   describe 'find user voted? by votable' do
 
     let(:user) { create(:user) }

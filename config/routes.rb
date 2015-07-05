@@ -8,8 +8,12 @@ Rails.application.routes.draw do
     delete :destroy_vote, on: :member
   end
 
-  resources :questions, concerns: [:votable] do
-    resources :answers, concerns: [:votable], shallow: true do
+  concern :commentable do
+    resources :comments
+  end
+
+  resources :questions, concerns: [:votable, :commentable] do
+    resources :answers, concerns: [:votable, :commentable], shallow: true do
       post :best_answer, on: :member
     end
   end

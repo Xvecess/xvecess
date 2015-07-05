@@ -1,0 +1,33 @@
+// Place all the styles related to the Comments controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+form.new_comment {
+  max-width: 350px;
+}
+
+.comment-body {
+  padding: 5px 0;
+  border-bottom: 1px solid silver;
+  max-width: 300px;
+}
+
+.question-comments-list {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.answer-comments-list {
+  list-style: none;
+  margin-bottom: 10px;
+}
+
+.comment-form-control span {
+  display: inline-block;
+  padding: 0 10px;
+}
+
+li.comment-body span {
+  display: inline-block;
+  padding: 0 20px;
+}

@@ -1,8 +1,8 @@
 - if answer.persisted?
-  .row.answer-body id = answer.id
+  section.row.answer id = answer.id
     .answer-votes.col-md-2
       = render 'answers/votes', answer: answer
-    .answer.col-md-8
+    .answer.col-md-9
       - if answer.best
         p.set-best-answer Пользователь #{answer.question.user.email} отметил этот ответ, как лучший
       p Ответ #{answer.created_at.to_formatted_s(:long)} пользователем #{answer.user.email}
@@ -17,7 +17,7 @@
         p = link_to 'Удалить ответ', answer, remote: true,
                     method: :delete, class: 'delete_answer',
                     data: {answer_id: answer.id}
-        .container
+        .row
           = simple_form_for answer, remote: true, html: {class: 'form-horizontal edit_answer',
                                                          id: "edit-answer-#{answer.id}"} do |f|
             = f.label :body, 'Редактирование ответа'
@@ -29,3 +29,11 @@
       - if user_signed_in?
         - if answer.question.user_id == current_user.id && !answer.best
           =link_to 'Это лучший ответ', best_answer_answer_path(answer), method: :post
+
+      .answer-comments
+        p Комментарии
+        ul.answer-comments-list id = answer.id
+          = render answer.comments
+        .comment-form
+          -if user_signed_in?
+            = render 'comments/form', comment: Comment.new, commentable: answer
