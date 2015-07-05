@@ -1,4 +1,6 @@
 ready = ->
+  del_link()
+
   pub = PrivatePub
   pub.subscribe "/comments", (data, channel) ->
     comment = $.parseJSON(data['comment'])
@@ -17,8 +19,6 @@ ready = ->
       $('ul.answer-comments-list#' + commentable_id).append(li)
     $('textarea.text').val('')
     del_link()
-
-  del_link()
 
 $(document).ready(ready)
 $(document).on('page:load', ready)
