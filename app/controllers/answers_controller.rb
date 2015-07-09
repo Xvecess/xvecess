@@ -4,8 +4,10 @@ class AnswersController < ApplicationController
   before_action :load_answer, only: [:update, :destroy, :best_answer]
   before_action :answer_user_compare, only: [:update, :destroy]
 
+  respond_to :js, :json
+
   def create
-    @answer = @question.answers.create(answer_params.merge(user: current_user))
+    respond_with @answer = @question.answers.create(answer_params.merge(user: current_user))
   end
 
   def update
@@ -14,7 +16,7 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    @answer.destroy
+    respond_with @answer.destroy
   end
 
   def best_answer

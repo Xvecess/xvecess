@@ -24,7 +24,7 @@ I want to be able to ask question
     fill_in 'Body', with: 'Test Text'
     click_on 'Create Question'
 
-    expect(page).to have_content 'Ваш вопрос добавлен'
+    expect(page).to have_content 'Question was successfully created'
     expect(page).to have_content 'Test question'
   end
 
