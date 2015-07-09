@@ -1,10 +1,12 @@
 class CommentsController < ApplicationController
   before_action :find_commentable
   before_action :find_comment, only: [:destroy]
+  after_action :publish_comment, only: [:create]
+
+  respond_to :json
 
   def create
     @comment = @commentable.comments.create(comment_params.merge(user_id: current_user.id))
-    PrivatePub.publish_to "/comments", comment: @comment.to_json
     render nothing: true
   end
 
@@ -28,5 +30,9 @@ class CommentsController < ApplicationController
   def find_commentable
     resource, id = request.path.split('/')[1, 2]
     @commentable = resource.singularize.classify.constantize.find(id)
+  end
+
+  def publish_comment
+    PrivatePub.publish_to "/comments", comment: @comment.to_json
   end
 end

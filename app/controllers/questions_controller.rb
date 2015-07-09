@@ -6,7 +6,7 @@ class QuestionsController < ApplicationController
   before_action :question_user_compare, only: [:update, :destroy]
 
   def index
-    @questions = Question.all
+    respond_with @questions = Question.all
   end
 
   def new
@@ -24,24 +24,17 @@ class QuestionsController < ApplicationController
   end
 
   def create
-    @question = current_user.questions.new(question_params)
-    if @question.save
-      redirect_to questions_path, notice: 'Ваш вопрос добавлен'
-    else
-      render :new
-    end
+    respond_with @question = current_user.questions.create(question_params),
+                 location: questions_path
   end
 
   def update
-    if @question.update(question_params)
-      redirect_to @question, notice: 'Вопрос успешно обновлен'
-    else
-      render 'edit'
-    end
+    @question.update(question_params)
+    respond_with @question, location: @question
   end
 
   def destroy
-    redirect_to questions_path if @question.destroy
+   respond_with @question.destroy, location: @questions
   end
 
   private
