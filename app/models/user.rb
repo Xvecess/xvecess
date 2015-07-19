@@ -18,7 +18,7 @@ class User < ActiveRecord::Base
     authorization = Authorization.where(provider: auth.provider, uid: auth.uid.to_s).first
     return authorization.user if authorization
 
-    email = auth.info[:email]
+    email = auth.info[:email] unless auth.info.blank?
     user = User.where(email: email).first
     if user
       user.create_authorization(auth)
@@ -36,4 +36,3 @@ class User < ActiveRecord::Base
     authorizations.create(provider: auth.provider, uid: auth.uid)
   end
 end
-

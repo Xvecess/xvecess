@@ -1,18 +1,16 @@
 class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   before_action :set_auth
   before_action :user_with_auth
+  before_action :signed_in_auth_provider
 
   def facebook
-    return if signed_in_auth_provider
   end
 
   def twitter
-    return if signed_in_auth_provider
-    render 'omniauth_callbacks/auth_confirm_email', locals: {auth: @auth}
+    render 'omniauth_callbacks/auth_confirm_email', locals: { auth: @auth }
   end
 
   def auth_confirm_email
-    return if signed_in_auth_provider
   end
 
   protected
