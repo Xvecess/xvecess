@@ -87,5 +87,5 @@ Rails.application.configure do
       enable_starttls_auto: true
   }
 
-  config.action_mailer.default_url_options = {host: 'xvecess.herokuapp.com'}
+  config.action_mailer.default_url_options = {host: 'http://xvecess.herokuapp.com'}
 end
