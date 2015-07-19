@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
   has_many :authorizations
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :twitter]
 
@@ -24,10 +24,11 @@ class User < ActiveRecord::Base
       user.create_authorization(auth)
     else
       password = Devise.friendly_token[0, 20]
-      user = User.create!(email: email, password: password, password_confirmation: password)
+      user = User.create(email: email, password: password, password_confirmation: password)
+      user.skip_confirmation! if auth.provider == 'facebook'
+      return nil unless user.save
       user.create_authorization(auth)
     end
-
     user
   end
 
@@ -36,4 +37,3 @@ class User < ActiveRecord::Base
   end
 end
 
-# "#{auth.uid}@facebook.com"

@@ -11,7 +11,7 @@ quest can register
     fill_password
     click_on 'Sign up'
 
-    expect(page).to have_content 'Welcome! You have signed up successfully'
+    expect(page).to have_content 'A message with a confirmation link has been sent to your email address'
   end
 
   scenario 'quest enters blank password' do
