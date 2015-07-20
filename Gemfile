@@ -1,6 +1,4 @@
 source 'https://rubygems.org'
-
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.1'
 # Use postgresql as the database for Active Record
@@ -13,7 +11,6 @@ gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
-
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
@@ -28,6 +25,12 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'slim-rails'
 
 gem 'devise'
+
+gem 'omniauth'
+
+gem 'omniauth-facebook'
+
+gem 'omniauth-twitter'
 
 gem 'carrierwave'
 
@@ -50,6 +53,10 @@ gem 'private_pub'
 gem 'thin'
 
 gem 'responders'
+
+gem 'mandrill-rails'
+
+gem 'letter_opener', group: :development
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -84,5 +91,7 @@ group :test do
   gem 'json_spec'
 
   gem 'quiet_assets'
+
+  gem 'capybara-email'
 end
 

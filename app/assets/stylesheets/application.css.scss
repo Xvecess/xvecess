@@ -38,3 +38,21 @@ ul.navigation-links li {
 .new_user {
   max-width: 250px;
 }
+
+.oauth {
+  margin-top: 35px;
+  span.oauth-link {
+    height: 40px;
+    width: 250px;
+    display: inline-block;
+    padding: 10px;
+    border: 1px solid silver;
+    background-color: gainsboro;
+    margin-bottom: 10px;
+    a:hover, a:visited, a:link, a:active {
+      text-decoration: none;
+      color: black;
+      cursor: hand;
+    }
+  }
+}

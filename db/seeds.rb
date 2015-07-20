@@ -9,6 +9,7 @@ User.delete_all
 Question.delete_all
 Comment.delete_all
 10.times do |n|
-  User.create(email: "#{n+1}@#{n+1}.ru", password: '12345678', password_confirmation: '12345678')
+  User.create(email: "#{n+1}@#{n+1}.ru", password: '12345678',
+              password_confirmation: '12345678',confirmed_at: DateTime.now)
   Question.create(title: "Вопрос #{n+1} пользователя", body: 'Текст вопроса', user_id: (n+1) )
 end

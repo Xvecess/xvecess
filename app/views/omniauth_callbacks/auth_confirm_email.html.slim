@@ -1,0 +1,14 @@
+.email-confirm
+  h2 Log in
+  =form_tag auth_confirm_email_path, method: :post
+    .field
+      = label_tag 'Email'
+      br
+      = email_field 'auth[info]', :email, autofocus: true, class: 'form-control'
+    = hidden_field_tag 'auth[provider]',  @auth.provider
+    = hidden_field_tag 'auth[uid]', @auth.uid
+    .actions
+      br
+      = submit_tag 'Confirm email', class: 'btn btn-info'
+
+= render "devise/shared/links"
