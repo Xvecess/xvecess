@@ -7,7 +7,7 @@ class OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def twitter
-    render 'omniauth_callbacks/auth_confirm_email', locals: { auth: @auth }
+    render 'omniauth_callbacks/auth_confirm_email'
   end
 
   def auth_confirm_email

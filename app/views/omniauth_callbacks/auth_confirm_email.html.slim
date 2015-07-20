@@ -5,8 +5,8 @@
       = label_tag 'Email'
       br
       = email_field 'auth[info]', :email, autofocus: true, class: 'form-control'
-    = hidden_field_tag 'auth[provider]',  auth.provider
-    = hidden_field_tag 'auth[uid]', auth.uid
+    = hidden_field_tag 'auth[provider]',  @auth.provider
+    = hidden_field_tag 'auth[uid]', @auth.uid
     .actions
       br
       = submit_tag 'Confirm email', class: 'btn btn-info'
