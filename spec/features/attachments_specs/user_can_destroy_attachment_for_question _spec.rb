@@ -4,7 +4,7 @@ feature 'destroy files on  question' do
 
   given(:user) { create(:user) }
   given!(:question) { create(:question, user: user) }
-  given!(:attachment) { create(:attachment, attachable: question) }
+  given!(:attachment) { create(:attachment, attachable: question, user: user) }
 
   background do
     sign_in(user)

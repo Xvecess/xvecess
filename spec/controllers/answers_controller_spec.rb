@@ -4,7 +4,7 @@ describe AnswersController do
 
   let(:user) { create(:user) }
   let(:question) { create(:question, user_id: user.id) }
-  let!(:answer) { create(:answer, question_id: question.id, user_id: user.id, best: false) }
+  let!(:answer) { create(:answer, question_id: question.id, user_id: user.id) }
 
 
   describe 'POST #create' do
@@ -105,7 +105,7 @@ describe AnswersController do
 
     context 'with  best equal false' do
 
-      before { answer.update!(best: false) }
+      before { answer.update!(user_id: @user.id,best: false) }
 
       it 'sets answer best on true' do
         post :best_answer, id: answer

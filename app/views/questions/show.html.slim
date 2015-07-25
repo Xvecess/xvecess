@@ -10,8 +10,9 @@
         -@question.attachments.each do |a|
           = render 'attachments/attached', a: a, subject: @question
 
-    - if user_signed_in? && @question.user_id == current_user.id
+    - if can?(:update, @question)
       p= link_to 'Редактировать вопрос', edit_question_path(@question)
+    - if can?(:destroy, @question)
       p= link_to 'Удалить вопрос', @question, method: :delete
     p Вопрос задан #{ @question.created_at.to_formatted_s(:long)} пользователем #{ @question.user.email}
 
@@ -26,7 +27,7 @@
   section.answers
     = render @question.answers
 
-- if user_signed_in?
+- if can?(:create, Answer)
   .row
     .col-md-5
       = simple_form_for [@question, @answer], remote: true, html: {class: 'form-horizontal new_answer'} do |f|

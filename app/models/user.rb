@@ -10,6 +10,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :twitter]
 
+  enum status: {quest: 0, confirmed_user: 1, admin: 99 }
   def voted?(votable)
     votes.where(votable: votable).first ? true : false
   end

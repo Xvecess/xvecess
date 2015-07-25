@@ -5,7 +5,7 @@ feature 'destroy files on  answer' do
   given(:user) { create(:user) }
   given(:question) { create(:question, user: user) }
   given!(:answer) { create(:answer, user: user, question: question) }
-  given!(:attachment) { create(:attachment, attachable: answer) }
+  given!(:attachment) { create(:attachment, attachable: answer, user: user) }
 
   background do
     sign_in(user)

@@ -6,6 +6,8 @@ class AnswersController < ApplicationController
 
   respond_to :js, :json
 
+  authorize_resource
+
   def create
     respond_with @answer = @question.answers.create(answer_params.merge(user: current_user))
   end
@@ -20,6 +22,7 @@ class AnswersController < ApplicationController
   end
 
   def best_answer
+    authorize! :best_answer, @answer
     @answer.set_best_answer
     redirect_to @answer.question
   end

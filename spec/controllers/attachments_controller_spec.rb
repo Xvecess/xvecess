@@ -11,7 +11,9 @@ describe AttachmentsController do
 
     context 'user owner attachment' do
 
-      before { question.update(user: @user) }
+      before  do
+         question.update(user: @user)
+      end
 
       it 'delete attachment' do
         expect { delete :destroy,
