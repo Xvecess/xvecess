@@ -1,27 +1,20 @@
 class Ability
   include CanCan::Ability
 
+  attr_reader :user
+
   def initialize(user)
-    return quest_abilities if user.nil?
+    return guest_abilities if user.nil?
     @user = user
-
-    case user.status
-      when 'quest' then
-        quest_abilities
-      when 'admin' then
-        admin_abilities
-      when 'confirmed_user' then
-        confirmed_user_abilities
-    end
-
+    send("#{user.status}_abilities")
   end
 
-  def quest_abilities
+  def guest_abilities
     can :read, [Question, Answer, Comment, User]
   end
 
   def confirmed_user_abilities
-    quest_abilities
+    guest_abilities
 
     can :create, [Answer, Attachment, Comment, Question, Vote]
     can :create, [Authorization], user: @user
@@ -30,7 +23,7 @@ class Ability
 
     can :destroy, [Answer, Comment, Question], user: @user
     can :destroy, [Attachment] do |attachment|
-      attachment.attachable.user == @user
+      attachment.attachable.user_id == @user.id
     end
 
     can :vote_up, [Question, Answer] do |votable|
@@ -44,7 +37,7 @@ class Ability
     end
 
     can :best_answer, Answer do |answer|
-      answer.question.user == @user && !answer.best
+      answer.question.user_id == @user.id && !answer.best
     end
   end
 

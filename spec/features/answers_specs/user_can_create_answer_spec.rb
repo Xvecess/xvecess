@@ -3,7 +3,7 @@ require_relative '../acceptance_helper'
 feature 'User  an create answers for questions' do
 
   given(:user) { create(:user) }
-  given!(:question) { create(:question, user_id: user.id) }
+  given!(:question) { create(:question, user: user) }
 
   scenario 'authenticated user try create answer', js: true do
     sign_in(user)

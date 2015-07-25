@@ -6,7 +6,7 @@ The users were asked the question can
  he decided his problem} do
 
   given(:user) { create(:user) }
-  given(:question) { create(:question, user_id: user.id) }
+  given(:question) { create(:question, user: user) }
 
 
   context 'with one answer on page' do

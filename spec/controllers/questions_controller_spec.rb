@@ -62,7 +62,10 @@ describe QuestionsController do
   describe 'GET #edit' do
     sign_in_user
 
-    before { get :edit, id: question }
+    before do
+       question.update!(user: @user)
+       get :edit, id: question
+    end
 
     it 'it sets variable @question  requested question' do
       expect(assigns(:question)).to eq question

@@ -7,7 +7,7 @@ I want to be able to ask question
 } do
 
   given!(:user) { create(:user) }
-  given!(:questions) { create_list(:question, 2, user_id: user.id) }
+  given!(:questions) { create_list(:question, 2, user: user) }
 
   scenario 'authenticated user can see questions list' do
     sign_in(user)

@@ -4,8 +4,8 @@ feature 'User can Update and Destroy his answer' do
 
   given(:user) { create(:user) }
   given(:user2) { create(:user) }
-  given(:question) { create(:question, user_id: user.id) }
-  given!(:answer) { create(:answer, question_id: question.id, user_id: user.id) }
+  given(:question) { create(:question, user: user) }
+  given!(:answer) { create(:answer, question: question, user: user) }
 
   scenario 'authenticated user try destroy your answer', js: true  do
     sign_in(user)

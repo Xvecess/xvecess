@@ -22,7 +22,6 @@ class AnswersController < ApplicationController
   end
 
   def best_answer
-    authorize! :best_answer, @answer
     @answer.set_best_answer
     redirect_to @answer.question
   end
