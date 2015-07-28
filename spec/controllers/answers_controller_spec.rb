@@ -2,10 +2,10 @@ require 'rails_helper'
 
 describe AnswersController do
 
-  let(:user) { create(:user) }
+  let!(:user) { create(:user, status: 1) }
   let(:question) { create(:question, user_id: user.id) }
-  let!(:answer) { create(:answer, question_id: question.id, user_id: user.id, best: false) }
-
+  let!(:answer) { create(:answer, question_id: question.id, user_id: user.id) }
+  let!(:answer2) { create(:answer, question_id: question.id, user_id: user.id) }
 
   describe 'POST #create' do
     sign_in_user
@@ -105,7 +105,10 @@ describe AnswersController do
 
     context 'with  best equal false' do
 
-      before { answer.update!(best: false) }
+      before  do
+        question.update!(user: @user)
+         answer.update!(best: false)
+      end
 
       it 'sets answer best on true' do
         post :best_answer, id: answer
@@ -120,10 +123,13 @@ describe AnswersController do
     end
     context 'with best equal true' do
 
-      before { answer.update!(best: true) }
+      before  do
+        question.update!(user: @user)
+        answer.update!(best: true)
+      end
 
       it 'sets answer best on true' do
-        post :best_answer, id: answer
+        post :best_answer, id: answer2
         answer.reload
         expect(answer.best).to be false
       end

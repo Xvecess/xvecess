@@ -6,23 +6,26 @@ module Voted
   end
 
   def vote_up
-    unless @parent.user_id == current_user.id
-      @parent.vote_up(current_user)
-      @parent.reload
-    end
-    render json: @parent
+    authorize! :vote_up, @parent
+    @parent.vote_up(current_user)
+    publish_vote
   end
 
   def vote_down
-    unless @parent.user_id == current_user.id
-      @parent.vote_down(current_user)
-      @parent.reload
-    end
-    render json: @parent
+    authorize! :vote_down, @parent
+    @parent.vote_down(current_user)
+    publish_vote
   end
 
   def destroy_vote
+    authorize! :destroy_vote, @parent
     @parent.destroy_vote(current_user)
+    publish_vote
+  end
+
+  private
+
+  def publish_vote
     @parent.reload
     render json: @parent
   end

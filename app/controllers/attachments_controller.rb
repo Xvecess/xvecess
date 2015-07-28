@@ -1,13 +1,11 @@
 class AttachmentsController < ApplicationController
   before_action :find_attachment, only: [:destroy]
 
+  authorize_resource
+
   def destroy
-    if @attachment.attachable.user_id == current_user.id
-      @attachment.destroy
-      render nothing: true
-    else
-      redirect_to root_url, notice: 'Запрещено'
-    end
+    @attachment.destroy
+    render nothing: true
   end
 
   private

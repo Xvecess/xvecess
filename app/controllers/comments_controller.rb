@@ -5,15 +5,15 @@ class CommentsController < ApplicationController
 
   respond_to :json
 
+  authorize_resource
+
   def create
     @comment = @commentable.comments.create(comment_params.merge(user_id: current_user.id))
     render nothing: true
   end
 
   def destroy
-    if @comment.user == current_user
-      @comment.destroy
-    end
+    @comment.destroy
     render nothing: true
   end
 

@@ -7,5 +7,6 @@ FactoryGirl.define do
     password '12345678'
     password_confirmation '12345678'
     confirmed_at DateTime.now
+    status 1
   end
 end

@@ -1,7 +1,7 @@
 li.comment-body id = "comment-#{comment.id}"
   span
     = comment.body
-  -if comment.user == current_user
+  -if can?(:destroy, comment)
     span
       = link_to 'Удалить комментарий', comment, class: 'delete-comment', method: :delete,
                 remote: true, data: {comment_id: comment.id }

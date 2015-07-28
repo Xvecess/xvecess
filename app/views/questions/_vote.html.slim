@@ -11,7 +11,7 @@
             class: 'question-vote-down',
             data: {question_id: question.id, type: :json}, method: :put
 
--if user_signed_in? && question.user_id != current_user.id
+-if can?(:destroy_vote, @question)
   .vote-question-reload
     = link_to 'переголосовать', destroy_vote_question_path(question), remote: true,
               class: 'question-vote-reload',

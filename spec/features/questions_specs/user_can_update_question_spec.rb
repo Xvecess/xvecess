@@ -4,7 +4,7 @@ feature 'User can Update and Destroy  your question' do
 
   given!(:user) { create(:user) }
   given(:user2) { create(:user) }
-  given!(:question) { create(:question, user_id: user.id) }
+  given!(:question) { create(:question, user: user) }
 
   scenario 'authenticated user  try update your question' do
     sign_in(user)
