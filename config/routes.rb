@@ -1,6 +1,16 @@
 Rails.application.routes.draw do
 
-  devise_for :users, controllers: { omniauth_callbacks: 'omniauth_callbacks' }
+  use_doorkeeper
+
+  namespace :api do
+    namespace :v1 do
+      resources :profiles do
+        get :me, on: :collection
+      end
+    end
+  end
+
+  devise_for :users, controllers: {omniauth_callbacks: 'omniauth_callbacks'}
   devise_scope :user do
     post 'auth_confirm_email', to: 'omniauth_callbacks#auth_confirm_email'
   end
@@ -22,6 +32,7 @@ Rails.application.routes.draw do
   end
 
   resources :attachments, only: [:destroy]
+
 
   root to: 'questions#index'
 end
