@@ -32,8 +32,8 @@ describe 'Profile API' do
           expect(response.body).to be_json_eql(me.send(attr.to_sym).to_json).at_path(attr)
         end
       end
-      %w(id email).each do |attr|
 
+      %w(password password_confirmation).each do |attr|
         it "does not contain #{attr}" do
           expect(response.body).to_not have_json_path(attr)
         end
@@ -77,8 +77,8 @@ describe 'Profile API' do
           expect(response.body).to be_json_eql(users[0].send(attr.to_sym).to_json).at_path("0/#{attr}")
         end
       end
-      %w(id email).each do |attr|
 
+      %w(password password_confirmation).each do |attr|
         it "does not contain #{attr}" do
           expect(response.body).to_not have_json_path("0/#{attr}")
         end
