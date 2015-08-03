@@ -18,6 +18,7 @@ describe 'Profile API' do
     end
 
     context 'authorized' do
+
       let(:me) { create(:user) }
       let(:access_token) { create(:access_token, resource_owner_id: me.id) }
 
@@ -34,6 +35,7 @@ describe 'Profile API' do
       end
 
       %w(password password_confirmation).each do |attr|
+
         it "does not contain #{attr}" do
           expect(response.body).to_not have_json_path(attr)
         end
@@ -59,8 +61,8 @@ describe 'Profile API' do
 
     context 'authorized' do
       let(:me) { create(:user) }
-      let (:users) { create_list(:user, 2) }
-      let!(:access_token) { create(:access_token, resource_owner_id: me.id) }
+      let!(:users) { create_list(:user, 2) }
+      let(:access_token) { create(:access_token, resource_owner_id: me.id) }
 
       before { get '/api/v1/profiles', format: :json, access_token: access_token.token }
 

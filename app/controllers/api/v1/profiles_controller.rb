@@ -1,4 +1,5 @@
 class Api::V1::ProfilesController < ApplicationController
+  skip_before_action :authenticate_user!
   before_action :doorkeeper_authorize!
   authorize_resource class: User
 
