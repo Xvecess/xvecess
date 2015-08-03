@@ -39,6 +39,8 @@ class Ability
     can :best_answer, Answer do |answer|
       answer.question.user_id == @user.id && !answer.best
     end
+
+    can :me, User, id: user.id
   end
 
   def admin_abilities
