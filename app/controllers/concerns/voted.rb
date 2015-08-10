@@ -27,6 +27,6 @@ module Voted
 
   def publish_vote
     @parent.reload
-    render json: @parent
+    render json: @parent, serializer: nil
   end
 end
