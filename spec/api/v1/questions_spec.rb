@@ -9,22 +9,9 @@ describe 'Question API' do
     let!(:question) { questions.first }
     let!(:answer) { create(:answer, question: question, user: user) }
 
+    it_behaves_like 'API Authenticable'
+
     before { get '/api/v1/questions', format: :json, access_token: access_token.token }
-
-    context 'unauthorized' do
-
-      it 'returns 401 status if there is no access_token' do
-        get '/api/v1/questions', format: :json
-
-        expect(response.status).to eq 401
-      end
-
-      it 'returns 401 status if  access_token is invalid' do
-        get '/api/v1/questions', format: :json, access_token: '1234'
-
-        expect(response.status).to eq 401
-      end
-    end
 
     context 'authorized' do
 
@@ -65,6 +52,10 @@ describe 'Question API' do
       end
 
     end
+
+    def do_request(options = {})
+      get  '/api/v1/questions', { format: :json }.merge(options)
+    end
   end
 
   describe 'GET /show' do
@@ -73,22 +64,9 @@ describe 'Question API' do
     let!(:comments) { create_list(:comment, 2, commentable: question, user: user) }
     let!(:attachments) { create_list(:attachment, 2, attachable: question) }
 
+    it_behaves_like 'API Authenticable'
+
     before { get api_v1_question_path(question), format: :json, access_token: access_token.token }
-
-    context 'unauthorized' do
-
-      it 'returns 401 status if there is no access_token' do
-        get api_v1_question_path(question), format: :json
-
-        expect(response.status).to eq 401
-      end
-
-      it 'returns 401 status if  access_token is invalid' do
-        get api_v1_question_path(question), format: :json, access_token: '1234'
-
-        expect(response.status).to eq 401
-      end
-    end
 
     context 'authorized' do
 
@@ -126,6 +104,10 @@ describe 'Question API' do
         expect(response.body).to be_json_eql(attachments.last.file.url.to_json).
                                      at_path('question/attachments/0/url')
       end
+    end
+
+    def do_request(options = {})
+      get  '/api/v1/questions', { format: :json }.merge(options)
     end
   end
 

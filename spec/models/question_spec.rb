@@ -15,18 +15,12 @@ describe Question do
 
   it { should have_many(:answers).dependent(:destroy) }
 
-  it { should have_many(:attachments).dependent(:destroy) }
-
-  it { should have_many(:comments).dependent(:destroy) }
-
   it { should validate_length_of(:title).
                   is_at_least(5).is_at_most(140) }
 
   it { should belong_to :user }
 
   it { should accept_nested_attributes_for :attachments }
-
-  it { should have_many(:votes).dependent(:destroy) }
 
   describe 'question has best answer ?' do
 
@@ -47,30 +41,12 @@ describe Question do
     end
   end
 
-  describe 'vote voted' do
+  let(:parent){ question }
 
-    it 'create new vote with value 1' do
-      question.votes.create(user: user2, vote_value: 1)
-      question.reload
-      expect(question.vote_sum).to eq 1
-    end
+  it_behaves_like 'Votable'
 
-    it 'create new vote with value -1' do
-      question.votes.create(user: user2, vote_value: -1)
-      question.reload
-      expect(question.vote_sum).to eq -1
-    end
-  end
+  it_behaves_like 'Attachable'
 
-  describe 'destroy vote' do
+  it_behaves_like 'Commentable'
 
-    let!(:vote) { create(:vote, votable: question, user: user) }
-
-    before { vote.destroy }
-
-    it 'delete vote' do
-      question.reload
-      expect(question.vote_sum).to eq 0
-    end
-  end
 end

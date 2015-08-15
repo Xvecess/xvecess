@@ -136,60 +136,7 @@ describe AnswersController do
     end
   end
 
-  describe 'PUT #vote_up' do
-    sign_in_user
+  let(:parent) { answer }
+  it_behaves_like 'ControllerVotable'
 
-    it 'should answer vote sum increment' do
-      put :vote_up, id: answer, format: :json
-      answer.reload
-
-      expect(answer.vote_sum).to eq 1
-    end
-
-    it 'should request question in json' do
-      put :vote_up, id: answer, format: :json
-
-      answer.reload
-      expect(response.body).to include answer.to_json
-    end
-  end
-
-  describe 'PUT #vote_down' do
-    sign_in_user
-
-    it 'should answer vote sum increment' do
-      put :vote_down, id: answer, format: :json
-      answer.reload
-
-      expect(answer.vote_sum).to eq -1
-    end
-
-    it 'should request question in json' do
-      put :vote_down, id: answer, format: :json
-
-      answer.reload
-      expect(response.body).to include answer.to_json
-    end
-  end
-
-  describe 'DELETE #vote_down' do
-    sign_in_user
-
-    before do
-      answer.votes.create(user: @user, votable: answer, vote_value: 1)
-    end
-
-    it 'should answer vote sum increment' do
-      delete :destroy_vote, id: answer, format: :json
-      answer.reload
-
-      expect(answer.vote_sum).to eq 0
-    end
-
-    it 'should request question in json' do
-      delete :destroy_vote, id: answer, format: :json
-      answer.reload
-      expect(response.body).to include answer.to_json
-    end
-  end
 end
