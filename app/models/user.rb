@@ -4,13 +4,14 @@ class User < ActiveRecord::Base
   has_many :votes, dependent: :destroy
   has_many :comments
   has_many :authorizations
+  has_many :subscribes,dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable, :confirmable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:facebook, :twitter]
 
-  enum status: {guest: 0, confirmed_user: 1, admin: 99 }
+  enum status: {guest: 0, confirmed_user: 1, admin: 99}
 
   def voted?(votable)
     votes.where(votable: votable).first ? true : false
@@ -36,5 +37,11 @@ class User < ActiveRecord::Base
 
   def create_authorization(auth)
     authorizations.create(provider: auth.provider, uid: auth.uid)
+  end
+
+  def self.send_daily_digest
+    find_each do |user|
+      DailyMailer.daily_digest(user).deliver_later
+    end
   end
 end

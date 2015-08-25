@@ -4,6 +4,8 @@ class Question < ActiveRecord::Base
   default_scope { order ('created_at DESC') }
 
   has_many :answers, dependent: :destroy
+  has_many :subscribes,dependent: :destroy
+  has_many :subscribed_users, through: :subscribes, source: :user
   has_many :attachments, as: :attachable, dependent: :destroy
   has_many :comments, as: :commentable, dependent: :destroy
   belongs_to :user

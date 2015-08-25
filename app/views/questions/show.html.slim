@@ -2,6 +2,13 @@
   section.question-votes.col-md-2
     = render 'questions/vote', question: @question
   section.question_show.col-md-9
+    .subscribe
+      -subscribe = @question.subscribes.find_by_user_id(current_user)
+      -if subscribe.blank?
+        = link_to 'Подписаться на обновление', question_subscribes_path(@question), method: :post, remote: true
+      -else
+        = link_to 'Отписаться', subscribe_path(subscribe), method: :delete,remote: true
+
     h3= @question.title
     p
       = @question.body

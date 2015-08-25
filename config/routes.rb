@@ -31,6 +31,7 @@ Rails.application.routes.draw do
     resources :answers, concerns: [:votable, :commentable], shallow: true do
       post :best_answer, on: :member
     end
+    resources :subscribes, only: [:create, :destroy], shallow:  true
   end
 
   resources :attachments, only: [:destroy]
