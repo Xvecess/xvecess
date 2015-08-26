@@ -36,7 +36,8 @@ describe Ability do
     let(:attachment2) { create(:attachment,  attachable: question2) }
     let(:vote) { create(:vote, user: user, votable: question) }
     let(:vote2) { create(:vote, user: user2, votable: question) }
-
+    let(:subscribe) {create(:subscribe, question: question, user: user)}
+    let(:subscribe2) {create(:subscribe, question: question2, user: user2)}
 
     it { should_not be_able_to :manage, :all }
     it { should be_able_to :read, Question }
@@ -50,6 +51,7 @@ describe Ability do
     it { should be_able_to :create, Comment }
     it { should be_able_to :create, Attachment }
     it { should be_able_to :create, Vote }
+    it { should be_able_to :create, Subscribe}
 
     it { should be_able_to :update, question, user: user }
     it { should be_able_to :update, answer, user: user }
@@ -64,7 +66,8 @@ describe Ability do
     it { should_not be_able_to :destroy, question2, user: user }
     it { should_not be_able_to :destroy, answer2, user: user }
     it { should_not be_able_to :destroy, comment2, user: user }
-
+    it { should be_able_to :destroy, subscribe, user: user }
+    it { should_not be_able_to :destroy, subscribe2, user: user }
 
     it { should be_able_to :vote_up, question2, user: user}
     it { should be_able_to :vote_up, answer2, user: user}

@@ -16,12 +16,12 @@ class Ability
   def confirmed_user_abilities
     guest_abilities
 
-    can :create, [Answer, Attachment, Comment, Question, Vote]
+    can :create, [Answer, Attachment, Comment, Question, Vote, Subscribe]
     can :create, [Authorization], user: @user
 
     can :update, [Answer, Comment, Question], user: @user
 
-    can :destroy, [Answer, Comment, Question], user: @user
+    can :destroy, [Answer, Comment, Question, Subscribe], user: @user
     can :destroy, [Attachment] do |attachment|
       attachment.attachable.user_id == @user.id
     end
