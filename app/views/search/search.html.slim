@@ -1,4 +1,11 @@
 .section.search
-  - @result.each do |item|
-    .search-item
-      = item
+  -if @result
+    - @result.each do |item|
+      .search-item
+        -if item.try(:body)
+          h3 = item.try(:title)
+          h5 = item.body
+        - else
+          h5 =item.try(:email)
+  - else
+    p Ничего не найдено

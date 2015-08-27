@@ -36,7 +36,7 @@ html
         p.alert-error #{ alert }
       .section.search
         = form_for :search, url: search_path, method: :get do|f|
-          = f.text_field :query
+          = f.text_field :query, value: params[:query]
           = f.select :target, [['В вопросах', 'questions'], ['В ответах', 'answers'], ['В комментариях', 'comments'], ['В пользователях', 'users']], { selected: params[:target]}
           = f.submit 'Search'
 

@@ -1,27 +1,20 @@
 class SearchController < ApplicationController
-  before_action :load_query, :load_target, only: :search
-  before_action :load_target, only: :search
+  skip_before_action :authenticate_user!
+  skip_authorization_check
+  before_action :load_query, :find_target, only: :search
 
   def search
-    case @target
-      when 'questions'
-        @result = Question.search(@query)
-      when 'answers'
-        @result = Answer.search(@query)
-      when 'comments'
-        @result = Comment.search(@query)
-      when 'users'
-        @result = User.search(@query)
-    end
+    @result = ThinkingSphinx.search(@query, classes: [@target])
   end
 
   private
 
-  def load_target
-    @target = params[:target]
+  def find_target
+    models ={answers: Answer, questions: Question, comments: Comment, users: User}
+    @target = models[params[:search][:target].to_sym]
   end
 
   def load_query
-    @query = params[:query]
+    @query = params[:search][:query]
   end
 end
