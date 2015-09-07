@@ -10,7 +10,7 @@ class SearchController < ApplicationController
   private
 
   def find_target
-    models ={answers: Answer, questions: Question, comments: Comment, users: User}
+    models ={ answers: Answer, questions: Question, comments: Comment, users: User, everywhere: ThinkingSphinx}
     @target = models[params[:search][:target].to_sym]
   end
 
