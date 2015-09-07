@@ -36,6 +36,7 @@ Rails.application.routes.draw do
 
   resources :attachments, only: [:destroy]
 
+  get 'search', to: 'search#search'
 
   root to: 'questions#index'
 end
