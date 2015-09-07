@@ -16,6 +16,7 @@ config/database.yml
 .idea/modules.xml
 .idea/misc.xml
 .idea/runConfigurations
+config/private_pub.yml
 .idea
 /public/uploads
 # Ignore application configuration
