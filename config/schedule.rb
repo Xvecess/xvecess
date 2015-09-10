@@ -26,3 +26,7 @@ end
 every 1.day, at: '7:00 pm' do
   runner QuestionUpdateNotificationJob.perform_now
 end
+
+every 60.minutes do
+  rake 'ts:index'
+end
