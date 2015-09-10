@@ -23,10 +23,14 @@
 #   runner DailyDigestJob.perform_now
 # end
 
-every 1.day, at: '7:00 pm' do
-  runner QuestionUpdateNotificationJob.perform_now
+unless ENV['RAILS_ENV'] == 'test'
+  every 1.day, at: '7:00 pm' do
+    runner QuestionUpdateNotificationJob.perform_now
+  end
 end
 
-every 60.minutes do
-  rake 'ts:index'
+unless ENV['RAILS_ENV'] == 'test'
+  every 60.minutes do
+    rake 'ts:index'
+  end
 end
