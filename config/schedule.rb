@@ -17,20 +17,16 @@
 #   runner "AnotherModel.prune_old_records"
 # end
 
-# Learn more: http://github.com/javan/whenever
+# Leacase @environmentrn more: http://github.com/javan/whenever
 
-# every 1.day, at: '9:00 pm' do
-#   runner DailyDigestJob.perform_now
-# end
-
-unless ENV['RAILS_ENV'] == 'test'
-  every 1.day, at: '7:00 pm' do
-    runner QuestionUpdateNotificationJob.perform_now
-  end
+every 1.day, at: '9:00 pm' do
+  runner DailyDigestJob.perform_now
 end
 
-unless ENV['RAILS_ENV'] == 'test'
-  every 60.minutes do
-    rake 'ts:index'
-  end
+every 1.day, at: '7:00 pm' do
+  runner QuestionUpdateNotificationJob.perform_now
+end
+
+every 60.minutes do
+  rake 'ts:index'
 end
